@@ -1,0 +1,418 @@
+---
+title: "Tibble tutorial"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    css: css/style.scss
+runtime: shiny_prerendered
+favicon: images/NEOF_favicon.png
+description: >
+  Tutorial covering the tibble 
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(lterdatasampler)
+library(mgrtibbles)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Tibbles
+
+<center>
+![](./images/tibble.png){style="width:150px"}
+</center>
+
+This tutorial covers tibbles and contains the following sections:
+
+- __Overview:__ The what and why of tibbles.
+- __Creating tibbles:__ Commands to create tibbles.
+
+
+[NEOF Tidyverse website reference](https://neof-workshops.github.io/Tidyverse/tibble/tibble.html)
+
+### Overview
+
+A __tibble__ (`tbl`) is a reimagining of the __data.frame__ (`df`) object. They are described as __data.frames__ that are:
+
+- __Lazy__: They don’t change variable names and they partial matching does not work.
+- __Surly__: They complain more such as when a variable does not exist.
+
+One important note is that __tibbles__ don’t have row names.
+
+Although __tibbles__ have advantages compared to __data.frames__ they are not always more suited to the task than __data.frames__. 
+However, __tibbles__ are generally always preferred over __data.frames__ when using __tidyverse__ packages.
+
+### Tibble example
+
+Run the below code for an example of:
+
+- Creating a basic tibble
+- Printing the tibble
+
+```{r tbl-example, exercise=TRUE, exercise.eval=FALSE}
+#Create a tibble
+tbl <- tibble::tibble(Day = c("Mon", "Tue", "Wed"),
+              Hawks = c(3,7,2),
+              Pigeons = c(52,21,61),
+              Starlings = c(1,2,1))
+#Print tibble
+print(tbl)
+```
+
+__Note:__ `print()` is used in this tutorial so the __tibbles__ and __data.frames__ are displayed as they would in your R terminal.
+Other tutorials will not use `print()` and the __tibbles__ will then be shown as full interactive tables.
+
+## Creating tibbles
+
+<center>
+![](images/tibble_create.png){style="width:200px"}
+</center>
+
+There are various ways to create __tibbles__. 
+Below are three methods:
+
+- Creating a new __tibble__ via code
+- Coercing a __data.frame__ into a __tibble__
+- Reading in a file as a __tibble__
+
+In this section you will be given instructions to create tibbles.
+You will need to use the pre made code and the guidance on the [creating tibbles webpage](https://neof-workshops.github.io/Tidyverse/tibble/creating_tibbles.html) to carry out the exercises.
+
+### Code to tibble
+
+Create and display the below tibble:
+
+```{r code-to-tbl-tbl}
+#Vectors to be used as columns
+Month <- c("January", "February", "March")
+Emperor <- c(219738, 207639, 198745)
+King <- c(2245928,2131628,2086237)
+Gentoo <- c(307582, 301583, 299710)
+
+#Create a tibble
+tbl <- tibble::tibble(Month, Emperor, King, Gentoo)
+#Print tibble
+print(tbl)
+```
+
+by completing the below code:
+
+__Tip:__ Remeber to use `print()` to print your __tibble__.
+
+```{r code-to-tbl-exercise, exercise=TRUE, exercise.eval=FALSE}
+#Vectors
+Month <- c("January", "February", "March")
+Emperor <- c(219738, 207639, 198745)
+King <- c(2245928,2131628,2086237)
+Gentoo <- c(307582, 301583, 299710)
+```
+
+```{r code-to-tbl-exercise-solution}
+#Vectors to be used as columns
+Month <- c("January", "February", "March")
+Emperor <- c(219738, 207639, 198745)
+King <- c(2245928,2131628,2086237)
+Gentoo <- c(307582, 301583, 299710)
+
+#Create a tibble
+tbl <- tibble::tibble(Month, Emperor, King, Gentoo)
+#Print tibble
+print(tbl)
+```
+
+### data.frame to tibble
+
+Next is converting a __data.frame__ to a __tibble__.
+
+```{r df-to-tbl-df, echo=TRUE}
+#Assign data.frame object to variable df
+df <- iris
+#Print top 6 rows of df
+print(head(df))
+```
+
+Complete the below code by convert the __data.frame__ (`iris`) into a __tibble__ and displaying it.
+
+```{r df-to-tbl-exercise, exercise=TRUE, exercise.eval=FALSE}
+#Assign tibble object to variable tbl
+tbl <- 
+#Display top 6 rows of tbl
+print(head(tbl))
+```
+
+```{r df-to-tbl-exercise-solution}
+#Assign tibble object to variable tbl
+tbl <- as_tibble(iris)
+#Print top 6 rows of tbl
+print(head(tbl))
+```
+
+### Quiz
+
+Super!
+Please attempt the below MCQs (Multiple choice questions) to solidify your learning.
+
+```{r create-tbl-mcq-1, echo=FALSE}
+question("When creating a tibble from vectors, what do the vectors become?",
+  answer("Columns", correct = TRUE),
+  answer("Rows"),
+  answer("Row names"),
+  allow_retry = TRUE
+)
+```
+
+```{r create-tbl-mcq-2, echo=FALSE}
+question("What do tibbles not have?",
+  answer("Columns"),
+  answer("Rows"),
+  answer("Row names", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r create-tbl-mcq-3, echo=FALSE}
+question("What function can be used to create a tibble from vectors?",
+  answer("`tibble::as_tibble()`"),
+  answer("`tibble::read_csv()`"),
+  answer("`tibble::tibble()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r create-tbl-mcq-4, echo=FALSE}
+question("What function can be used to convert a data.frame to a tibble?",
+  answer("`tibble::as_tibble()`", correct = TRUE),
+  answer("`tibble::read_csv()`"),
+  answer("`tibble::tibble()`"),
+  allow_retry = TRUE
+)
+```
+
+## Structure
+
+<center>
+![](images/tibble_structure.png){style="width:200px"}
+</center>
+
+__Tibbles__ have similar formats to __data.frames__ but with some extra functionality and terminology.
+
+### Tibble components
+
+The main components of a __tibble__ are:
+
+- __Size info:__ When printing a __tibble__ in R it shows the number of rows and columns at the top.
+- __Rows/observations:__ __Tibbles__ do not have row names, instead being indexed solely by numbers.
+  - Rows are also known as __observations__.
+- __Columns/variables:__ __Tibble__ columns have various features:
+  - They have column names.
+  - Below each column name is its __data class__ (int, dbl, chr, etc.).
+  - Columns are also known as __variables__.
+
+Please see the below __tibble__ as an example.
+
+```{r tbl_example}
+#Assign tibble object to variable tbl
+tbl <- as_tibble(iris)
+#Print top 6 rows of tbl
+print(head(tbl))
+```
+
+For more details on the __tibble__ structure and to see how they are normally presented please see [the tibble structure page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/structure.html).
+
+### Quiz
+
+Splendid!
+Please attempt the below MCQs (Multiple choice questions) on the structure of tibbles.
+
+```{r str-tbl-mcq-1, echo=FALSE}
+question("The top line of a printed tibble shows?",
+  answer("Data class"),
+  answer("Size info", correct = TRUE),
+  answer("Variables"),
+  allow_retry = TRUE
+)
+```
+
+```{r str-tbl-mcq-2, echo=FALSE}
+question("Rows are observations. What are columns?",
+  answer("Data class"),
+  answer("Size info"),
+  answer("Variables", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r str-tbl-mcq-3, echo=FALSE}
+question("What is displayed below each column name?",
+  answer("Data class", correct = TRUE),
+  answer("Size info"),
+  answer("Variables"),
+  allow_retry = TRUE
+)
+```
+
+## Subsetting
+
+<center>
+![](images/tibble_subset.png){style="width:200px"}
+</center>
+
+There are many ways to subset a __tibble__.
+This section will only show how to subset __tibbles__ using the same methods as you would for a __data.frame__.
+
+### Subsetting methods
+
+Methods to subset __tibbles__ include:
+
+- `tbl$column_name`: This produces a __vector__ from the specified column.
+- `tbl[rows,columns]`: This always produces a __tibble__ unless you only specify one element which becomes a __scalar__.
+  - Numbers can be used to  represent row or column indexes.
+  - Strings can be used for columns based on their names.
+  
+For more details and help for the following exercises please see [the tidyverse tibble subsetting page](https://neof-workshops.github.io/Tidyverse/tibble/subsetting.html).
+
+### Subsetting exercises
+
+For the exercises we'll use the tibble `mgrtibbles::mammal_sleep_tbl` which contains information on the amount of average sleep of various mammals.
+
+```{r pie-crab-subset, echo=TRUE}
+print(mammal_sleep_tbl)
+```
+
+### Extract with `$`
+
+Print the "dreaming" column as a __vector__.
+
+```{r dreaming-col-to-vector-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r dreaming-col-to-vector-exercise-solution}
+print(mammal_sleep_tbl$dreaming)
+```
+
+Print the first 4 elements of the "brain_wt" column as a __vector__.
+
+```{r brain-wt-col-to-vector-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r brain-wt-col-to-vector-exercise-solution}
+print(mammal_sleep_tbl$brain_wt[1:4])
+```
+
+### Extract with `[,]`
+
+Print the element in row 1 and column 2 as a scalar.
+
+```{r scalar-subset-exercise, exercise=TRUE, exercise.eval=FALSE}
+print(mammal_sleep_tbl[,])
+```
+
+```{r scalar-subset-exercise-solution}
+print(mammal_sleep_tbl[1,2])
+```
+
+Print rows 2 to 4 and columns 9 to 11 as a __tibble__.
+
+```{r tbl-extract-one-exercise, exercise=TRUE, exercise.eval=FALSE}
+print(mammal_sleep_tbl[,])
+```
+
+```{r tbl-extract-one-exercise-solution}
+print(mammal_sleep_tbl[2:4,9:11])
+```
+
+Print the columns of "body_wt" and "life_span" as a __tibble__.
+
+```{r tbl-extract-two-exercise, exercise=TRUE, exercise.eval=FALSE}
+print(mammal_sleep_tbl[,])
+```
+
+```{r tbl-extract-two-exercise-solution}
+print(mammal_sleep_tbl[,c("body_wt","life_span")])
+```
+
+Print rows 4, 5, 6, 7, and 14 for the columns "dreaming" and "total_sleep" as a __tibble__.
+
+```{r tbl-extract-three-exercise, exercise=TRUE, exercise.eval=FALSE}
+print(mammal_sleep_tbl[,])
+```
+
+```{r tbl-extract-three-exercise-solution}
+print(mammal_sleep_tbl[c(4:7,14),c("dreaming","total_sleep")])
+```
+
+### Quiz
+
+Great!
+Please attempt the below MCQs (Multiple choice questions) related to __tibble__ subsetting.
+
+```{r sub-tbl-mcq-1, echo=FALSE}
+question("Subsetting multiple elements with `[,]` produces a:",
+  answer("Scalar"),
+  answer("Tibble", correct = TRUE),
+  answer("Vector"),
+  allow_retry = TRUE
+)
+```
+
+```{r sub-tbl-mcq-2, echo=FALSE}
+question("Subsetting by a column name with `$` produces a:",
+  answer("Scalar"),
+  answer("Tibble"),
+  answer("Vector", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r sub-tbl-mcq-3, echo=FALSE}
+question("Subsetting one element with `[,]` produces a:",
+  answer("Scalar", correct = TRUE),
+  answer("Tibble"),
+  answer("Vector"),
+  allow_retry = TRUE
+)
+```
+
+## Printing or viewing
+
+<center>
+![](images/tibble_print.png){style="width:200px"}
+</center>
+
+__Tibbles__ have unique characteristics when printing or viewing them on a terminal.
+
+When viewing/printing a __tibble__ only a part of the __tibble__ will be displayed if its too wide (columns) or length (rows).
+Information on the rows and columns not displayed is shown below the __tibble__. 
+The rules for what is displayed are:
+
+- __Width:__ The terminal will only show as many columns as it has room for.
+  - The number of columns depends on the width of the columns (i.e. 10 narrow columns may fit where only 5 wide columns could fit).
+- __Length:__ By default a maximum of 10 rows will be displayed.
+
+For more detail please [the printing or view page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/printing.html)
+
+## Adding rows and columns
+
+<center>
+![](images/tibble_add_rows_columns.png){style="width:200px"}
+</center>
+
+Rows and columns can be added to a __tibble__ with the functions:
+
+- `tibble::add_column()`
+- `tibble::add_row()`
+
+However there are other functions in the next tutorial that tend to be more useful so we won't go into these 2 `tibble` functions here.
+
+If you are more interested please see [the adding rows and columns page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/add_rows_and_columns.html).
+
+## Finish
+
+Thanks and great going completing this tutorial.
+With this overview of tibbles done you can move onto the next `learnr` tutorial covering the very powerful and flexible [`dplyr`](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)

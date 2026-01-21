@@ -31,11 +31,16 @@ use_git()
 
 #With the package created the learnr directory goes into the inst sub-directory
 # Info: https://rstudio.github.io/learnr/articles/publishing.html#r-package
-#Created an inst diretcory and then added in a learnr tut diretcory
+#Created an inst/tutorial diretcory and then added learnr directories into
+# that directory
 
 #Ran devtools install
-Library("devtools")
+library("devtools")
 install()
+
+#From here on I believe I can just add various learnr directories
+# to inst/tutorials and push to github to update the package
+#Keep in mind I need to reisntall this package when I want to test it
 
 
 #To run and use package
