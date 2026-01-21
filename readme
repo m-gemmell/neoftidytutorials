@@ -1,0 +1,55 @@
+#This package is for hosting learnr tutorials related to
+# the NOEF tidyverse site/workshop
+
+#Below are the R commands used to create this R package
+
+#For people to run my learnr tutorial the best method is for them to
+# load the tutorial
+# on their own rstudio setup through an R package
+#Therefore I need to create an R package to contain the learnr tut
+#Following these instruction:
+# https://r-pkgs.org/whole-game.html
+
+#UPdate devtools if needed
+install.packages("devtools")
+#Load packages
+library("devtools")
+
+#Set wd to directory
+setwd("~/Git/")
+#Create package
+create_package("~/Git/neoftidytutorials")
+
+#This opened a new rstudio window with the package
+#Add a git repo to it
+library("devtools")
+use_git()
+#I then added this repo to github via github desktop
+#This also restarted rstudio again
+
+
+
+#With the package created the learnr directory goes into the inst sub-directory
+# Info: https://rstudio.github.io/learnr/articles/publishing.html#r-package
+#Created an inst diretcory and then added in a learnr tut diretcory
+
+#Ran devtools install
+Library("devtools")
+install()
+
+
+#To run and use package
+#Ensure r shiny is up to date as well
+install.packages("remotes")
+library(remotes)
+
+remotes::install_github("m-gemmell/mgtidyverselearnr")
+library(mgtidyverselearnr)
+
+library("learnr")
+learnr::run_tutorial("mg_tutorial", package = "mgtidyverselearnr")
+
+
+
+#To see all available tutorials run the below
+learnr::run_tutorial()
