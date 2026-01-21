@@ -48,11 +48,11 @@ install()
 install.packages("remotes")
 library(remotes)
 
-remotes::install_github("m-gemmell/mgtidyverselearnr")
-library(mgtidyverselearnr)
+remotes::install_github("m-gemmell/neoftidytutorials")
+library(neoftidytutorials)
 
 library("learnr")
-learnr::run_tutorial("mg_tutorial", package = "mgtidyverselearnr")
+learnr::run_tutorial("tibbles", package = "neoftidytutorials")
 
 
 
