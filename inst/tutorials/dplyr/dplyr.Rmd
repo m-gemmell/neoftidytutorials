@@ -1,0 +1,323 @@
+---
+title: "Dplyr tutorial"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    css: css/style.scss
+runtime: shiny_prerendered
+favicon: images/NEOF_favicon.png
+description: >
+  Tutorial covering dplyr package 
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(lterdatasampler)
+library(mgrtibbles)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Dplyr
+
+<center>
+![](./images/dplyr.png){style="width:150px"}
+</center>
+
+This tutorial covers the `dplyr` package.
+The package consists of a variety of functions for the manipulations of __tibbles__. It is described as a “grammar of data manipulation” using verbs as the name of its various functions.
+
+This tutorials contains the following sections:
+
+- __Pipes:__ Using the tidyverse pipe (`|>`)  to chain/pipe functions together.
+- __Rows:__ The four main verbs/functions for row manipulation.
+- __Columns:__ The six main verbs/functions for column manipulation.
+- __Grouping:__ Grouping __tibbles__ by a specific variable or variables and carrying out group wise calculations.
+- __Binding:__ Binding __tibbles__ together by columns or rows.
+
+[NEOF Tidyverse website reference](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)
+
+## Pipes
+<center>
+![](./images/dplyr_pipe.png){style="width:150px"}
+</center>
+
+The preferred method when using `dplyr` and other __tidyverse__ package functions is to use pipes.
+
+The __tidyverse__ pipe symbol is `|>` (historically it was `%>%`).
+
+Pipes allow you to more easily combine multiple functions together with a logical flow. A big advantage of pipes is that they are generally easier to read compared to nesting functions within each other.
+
+[Tidyverse pipes webpage](https://neof-workshops.github.io/Tidyverse/dplyr/pipes.html)
+
+### Dataset
+
+In this section we'll look at the `hbr_maples` __tibble__ from the `lterdatasampler` package.
+
+```{r hbr-maples, echo=FALSE}
+hbr_maples
+```
+
+
+### One step pipes
+
+When using pipes it is common to pipe the R object (i.e. __tibble__) to the first function like so:
+
+```{r first-pipe, echo=TRUE}
+hbr_maples |>
+  #View top 6 rows
+  head()
+```
+
+As you can see above pipes can be used for all functions, not just __tidyverse__ functions.
+
+When piping the piped object object is then used as the first argument/parameter of the following function.
+
+In the below code block use a pipe to summarise the columns of `hbr_maples` with the `summary()` function.
+
+```{r summary-pipe-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples
+```
+
+```{r summary-pipe-exercise-solution}
+hbr_maples |>
+  #Summarise columns
+  summary()
+```
+
+### Multi step pipes
+
+The biggest benefit of pipes is being able to run multiple functions in a clear manner.
+
+Without pipes we can nest functions:
+
+__Note:__ The various `dplyr` functions will be explained later.
+
+```{r nested-function-example, echo=TRUE}
+summary(dplyr::select(dplyr::slice(dplyr::filter(hbr_maples, elevation == "Mid"), 1:60), c(leaf_dry_mass, stem_dry_mass)))
+```
+
+Or we can run each step separately, assigning where needed.
+
+```{r compart-functions-example, echo=TRUE}
+hbr_tbl <- dplyr::filter(hbr_maples, elevation == "Mid")
+hbr_tbl <- dplyr::slice(hbr_tbl,1:60)
+hbr_tbl <- dplyr::select(hbr_tbl, c(stem_length, corrected_leaf_area))
+summary(hbr_tbl)
+```
+
+However, piping is the nicest method as it:
+
+- Is clear and concise
+- Prevents us from making extra unnecessary object (`hbr_tbl`)
+- Can be easily edited
+- Can be nicely annotated
+
+```{r multi-pipe-functions-example, echo=TRUE}
+hbr_maples |>
+  #Filter to keep Mid elevation rows
+  dplyr::filter(elevation == "Mid") |>
+  #Slice out rows 1 to 60
+  dplyr::slice(1:60) |>
+  #Select specified columns
+  dplyr::select(c(stem_length, corrected_leaf_area)) |>
+  #Summarise columns
+  summary()
+```
+
+### Pipe exercises
+
+Superb! As a challenge change the below code examples so it uses pipes from function to function.
+
+The below code contains a lot of functions you haven't encountered or been taught yet.
+These will be covered later but you won't need to know how they work to convert the code to piped versions.
+
+The first code will show the top 6 rows of the watershed reference observations.
+
+```{r pipe-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+head(dplyr::filter(hbr_maples, watershed == "Reference"))
+```
+
+```{r pipe-1-exercise-solution}
+hbr_maples |>
+  #Filter to retain reference watershed rows
+  dplyr::filter(watershed == "Reference") |>
+  #Top 6 rows
+  head()
+```
+
+The second code will remove rows with NAs, extract the leaf1area and leaf2area columns, then calculate the means of each column.
+
+```{r pipe-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+#Drop rows with NAs
+hbr_tbl <- tidyr::drop_na(hbr_maples)
+#Select leaf area columns
+hbr_tbl <- dplyr::select(hbr_tbl, leaf1area,leaf2area)
+#Column means
+colMeans(hbr_tbl)
+```
+
+```{r pipe-2-exercise-solution}
+hbr_maples |>
+  #Drop rows with NAs
+  tidyr::drop_na() |>
+  #Select leaf area columns
+  dplyr::select(leaf1area,leaf2area) |>
+  #Column means
+  colMeans()
+```
+
+The third, and final, code keeps R2 transect rows, arranges the rows by stem_length, selects the 6th, 9th, and 10th columns, and slices out the bottom 8 rows.
+ 
+```{r pipe-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_tbl <- dplyr::arrange(
+  dplyr::filter(hbr_maples, transect == "R2"),
+    stem_length)
+dplyr::slice_tail(dplyr::select(hbr_tbl, c(6,9,10)), n = 8)
+```
+
+```{r pipe-3-exercise-solution}
+hbr_maples |>
+  #Filter to keep Transect R2 rows
+  dplyr::filter(transect == "R2") |>
+  #Arrange rows by stem_length row (lowest to highest)
+  dplyr::arrange(stem_length) |>
+  #Select columns 6, 9, & 10
+  dplyr::select(c(6,9,10)) |>
+  #Slice bottom 8 rows
+  dplyr::slice_tail(n = 8)
+```
+
+Great going! 
+We'll continue to use pipes throughout this tutorial and further ones.
+Let's continue to row based functions.
+
+## Row functions
+
+### The four verbs
+
+There four main `dplyr` verbs (i.e. functions) to manipulate rows. These are:
+
+- [__`arrange()`__](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html): Arrange the rows of a __tibble__. Can be used to reorder the rows based on the values of a column.
+- [__`distinct()`__](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html): Extracts unique/distinct rows from a __tibble__.
+- [__`filter()`__](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html): Extract rows by filtering with conditions. This can be used to pick rows of certain groups, filter based on numeric sizes, and more.
+- [__`slice()`__](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html): A set of methods to choose a slice of rows based on index positions, top and bottom observations, and min and max values based on a specific column. This is especially useful for piping (`|>`).
+
+## arrange()
+
+<center>
+![](./images/dplyr_arrange.png){style="width:150px"}
+</center>
+
+The `arrange()` function allows you to arrange/order a __tibble__ by a specified column.
+
+### Examples
+
+We'll use the `lterdatasampler::knz_bison` __tibble__ for examples.
+
+```{r knz-bison, echo=FALSE}
+knz_bison
+```
+
+You can arrange by a numeric column.
+By default this is in ascending order (lowest to largest).
+
+```{r arrange-1, echo=TRUE}
+knz_bison |>
+  dplyr::arrange(rec_month)
+```
+
+You can arrange by a string column.
+
+```{r arrange-2, echo=TRUE}
+knz_bison |>
+  dplyr::arrange(animal_code)
+```
+
+You can arrange in descending order with the `desc()` function.
+
+```{r arrange-3, echo=TRUE}
+knz_bison |>
+  dplyr::arrange(desc(animal_code))
+```
+
+You can even arrange by multiple columns.
+The priority of ordering is based on the order of the columns, from high to low priority.
+
+```{r arrange-4, echo=TRUE}
+knz_bison |>
+  dplyr::arrange(animal_weight, rec_year)
+```
+
+### Exercises
+
+With the above guidance and [the `arrange()` tidyverse webpage](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html) please attempt the below challenges.
+
+Arrange the `hbr_maples` __tibble__ by its "stem_length" column in ascending order.
+
+```{r arrange-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples |>
+```
+
+```{r arrange-1-exercise-solution}
+hbr_maples |>
+  #Arrange by stem_length
+  #default is ascending order
+  dplyr::arrange(stem_length)
+```
+
+Arrange the `hbr_maples` __tibble__ by its "watershed" column in descending order.
+
+```{r arrange-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples |>
+```
+
+```{r arrange-2-exercise-solution}
+hbr_maples |>
+  #Arrange by watershed in descending order
+  dplyr::arrange(desc(watershed))
+```
+
+Magnificent!
+Next is `distinct().
+
+## distinct()
+
+<center>
+![](./images/dplyr_distinct.png){style="width:150px"}
+</center>
+
+The `dplyr::distinct()` function extracts unique/distinct rows from a __tibble__.
+This is not commonly used but is very handy when you have duplicated rows in your __tibble__.
+
+[Tidyverse distinct() webpage](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html)
+
+We can manipulate the `lterdatasampler::knz_bison()` __tbl__ to duplicate the first 5 rows.
+
+```{r knz-bison-2, echo=TRUE}
+knz_bison |>
+  #Slice first 5 rows twice
+  dplyr::slice(c(1:5,1:5))
+```
+
+We can then use `distinct()` to ensure we have no duplicated rows.
+
+```{r knz-bison-distinct, echo=TRUE}
+knz_bison |>
+  #Slice first 5 rows twice
+  dplyr::slice(c(1:5,1:5)) |>
+  #Distinct
+  dplyr::distinct()
+```
+
+It is a fairly straightforward command so we'll move onto `filter()`.
+
+## filter()
+
+<center>
+![](./images/dplyr_filter.png){style="width:150px"}
+</center>
+
+[Tidyverse filter() page](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html)

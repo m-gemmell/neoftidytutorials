@@ -101,7 +101,7 @@ print(tbl)
 
 by completing the below code:
 
-__Tip:__ Remeber to use `print()` to print your __tibble__.
+__Tip:__ Remember to use `print()` to print your __tibble__.
 
 ```{r code-to-tbl-exercise, exercise=TRUE, exercise.eval=FALSE}
 #Vectors
