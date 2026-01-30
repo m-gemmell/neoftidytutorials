@@ -13,6 +13,7 @@ description: >
 
 ```{r setup, include=FALSE}
 library(learnr)
+learnr::tutorial_options(exercise.completion = FALSE)
 library(tidyverse)
 library(lterdatasampler)
 library(mgrtibbles)
@@ -30,15 +31,18 @@ This tutorial covers tibbles and contains the following sections:
 
 - __Overview:__ The what and why of tibbles.
 - __Creating tibbles:__ Commands to create tibbles.
+- __Structure:__ The features of tibble.
+- __Subsetting:__ How to subset tibbles similar to data.frames.
+- __Printing or viewing:__ How tibbles are displayed/printed in R.
+- __Adding rows and columns:__ Brief intro to adding new rows and columns to a tibbles.
 
-
-[NEOF Tidyverse website reference](https://neof-workshops.github.io/Tidyverse/tibble/tibble.html)
+[Tidyverse Tibble page](https://neof-workshops.github.io/Tidyverse/tibble/tibble.html)
 
 ### Overview
 
 A __tibble__ (`tbl`) is a reimagining of the __data.frame__ (`df`) object. They are described as __data.frames__ that are:
 
-- __Lazy__: They don’t change variable names and they partial matching does not work.
+- __Lazy__: They don’t change variable names and partial matching does not work.
 - __Surly__: They complain more such as when a variable does not exist.
 
 One important note is that __tibbles__ don’t have row names.
@@ -80,7 +84,9 @@ Below are three methods:
 - Reading in a file as a __tibble__
 
 In this section you will be given instructions to create tibbles.
-You will need to use the pre made code and the guidance on the [creating tibbles webpage](https://neof-workshops.github.io/Tidyverse/tibble/creating_tibbles.html) to carry out the exercises.
+You will need to use the pre made code and the guidance on the below link to carry out the exercises.
+
+[Creating tibbles page](https://neof-workshops.github.io/Tidyverse/tibble/creating_tibbles.html)
 
 ### Code to tibble
 
@@ -221,7 +227,9 @@ tbl <- as_tibble(iris)
 print(head(tbl))
 ```
 
-For more details on the __tibble__ structure and to see how they are normally presented please see [the tibble structure page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/structure.html).
+For more details on the __tibble__ structure and to see how they are normally presented please see the below link:
+
+[Tibbles structure page](https://neof-workshops.github.io/Tidyverse/tibble/structure.html)
 
 ### Quiz
 
@@ -269,17 +277,19 @@ This section will only show how to subset __tibbles__ using the same methods as 
 Methods to subset __tibbles__ include:
 
 - `tbl$column_name`: This produces a __vector__ from the specified column.
-- `tbl[rows,columns]`: This always produces a __tibble__ unless you only specify one element which becomes a __scalar__.
+- `tbl[rows,columns]`: This always produces a __tibble__.
   - Numbers can be used to  represent row or column indexes.
   - Strings can be used for columns based on their names.
   
-For more details and help for the following exercises please see [the tidyverse tibble subsetting page](https://neof-workshops.github.io/Tidyverse/tibble/subsetting.html).
+For more details and help for the following exercises please see the below link:
+
+[Tibbles subsetting page](https://neof-workshops.github.io/Tidyverse/tibble/subsetting.html)
 
 ### Subsetting exercises
 
 For the exercises we'll use the tibble `mgrtibbles::mammal_sleep_tbl` which contains information on the amount of average sleep of various mammals.
 
-```{r pie-crab-subset, echo=TRUE}
+```{r pie-crab-subset, echo=FALSE}
 print(mammal_sleep_tbl)
 ```
 
@@ -307,7 +317,7 @@ print(mammal_sleep_tbl$brain_wt[1:4])
 
 ### Extract with `[,]`
 
-Print the element in row 1 and column 2 as a scalar.
+Print the element in row 1 and column 2.
 
 ```{r scalar-subset-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -317,7 +327,7 @@ print(mammal_sleep_tbl[,])
 print(mammal_sleep_tbl[1,2])
 ```
 
-Print rows 2 to 4 and columns 9 to 11 as a __tibble__.
+Print rows 2 to 4 and columns 9 to 11.
 
 ```{r tbl-extract-one-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -327,7 +337,7 @@ print(mammal_sleep_tbl[,])
 print(mammal_sleep_tbl[2:4,9:11])
 ```
 
-Print the columns of "body_wt" and "life_span" as a __tibble__.
+Print the columns of "body_wt" and "life_span".
 
 ```{r tbl-extract-two-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -372,8 +382,8 @@ question("Subsetting by a column name with `$` produces a:",
 
 ```{r sub-tbl-mcq-3, echo=FALSE}
 question("Subsetting one element with `[,]` produces a:",
-  answer("Scalar", correct = TRUE),
-  answer("Tibble"),
+  answer("Scalar"),
+  answer("Tibble", correct = TRUE),
   answer("Vector"),
   allow_retry = TRUE
 )
@@ -392,10 +402,12 @@ Information on the rows and columns not displayed is shown below the __tibble__.
 The rules for what is displayed are:
 
 - __Width:__ The terminal will only show as many columns as it has room for.
-  - The number of columns depends on the width of the columns (i.e. 10 narrow columns may fit where only 5 wide columns could fit).
+  - The number of columns depends on the width of the columns (i.e. 10 narrow columns may fit where only 5 wide wolumns could fit).
 - __Length:__ By default a maximum of 10 rows will be displayed.
 
-For more detail please [the printing or view page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/printing.html)
+For more detail please see:
+
+[Tibbles printing or viewing page](https://neof-workshops.github.io/Tidyverse/tibble/printing.html)
 
 ## Adding rows and columns
 
@@ -410,9 +422,11 @@ Rows and columns can be added to a __tibble__ with the functions:
 
 However there are other functions in the next tutorial that tend to be more useful so we won't go into these 2 `tibble` functions here.
 
-If you are more interested please see [the adding rows and columns page on the tidyverse site](https://neof-workshops.github.io/Tidyverse/tibble/add_rows_and_columns.html).
+If you are interested in more please see the below link:
+
+[Tibbles adding rows or columns page](https://neof-workshops.github.io/Tidyverse/tibble/add_rows_and_columns.html)
 
 ## Finish
 
 Thanks and great going completing this tutorial.
-With this overview of tibbles done you can move onto the next `learnr` tutorial covering the very powerful and flexible [`dplyr`](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)
+With this overview of tibbles done you can move onto the next `learnr` tutorial covering the very powerful and flexible [`dplyr`](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html).

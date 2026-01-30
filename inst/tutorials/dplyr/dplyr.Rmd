@@ -13,6 +13,7 @@ description: >
 
 ```{r setup, include=FALSE}
 library(learnr)
+learnr::tutorial_options(exercise.completion = FALSE)
 library(tidyverse)
 library(lterdatasampler)
 library(mgrtibbles)
@@ -37,7 +38,7 @@ This tutorials contains the following sections:
 - __Grouping:__ Grouping __tibbles__ by a specific variable or variables and carrying out group wise calculations.
 - __Binding:__ Binding __tibbles__ together by columns or rows.
 
-[NEOF Tidyverse website reference](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)
+[Tidyverse Dplyr page](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)
 
 ## Pipes
 <center>
@@ -48,93 +49,24 @@ The preferred method when using `dplyr` and other __tidyverse__ package function
 
 The __tidyverse__ pipe symbol is `|>` (historically it was `%>%`).
 
+__Keyboard shortcut:__ `ctrl + shift + m` is the keyboard shortcut for `|>`.
+
 Pipes allow you to more easily combine multiple functions together with a logical flow. A big advantage of pipes is that they are generally easier to read compared to nesting functions within each other.
-
-[Tidyverse pipes webpage](https://neof-workshops.github.io/Tidyverse/dplyr/pipes.html)
-
-### Dataset
-
-In this section we'll look at the `hbr_maples` __tibble__ from the `lterdatasampler` package.
-
-```{r hbr-maples, echo=FALSE}
-hbr_maples
-```
-
-
-### One step pipes
-
-When using pipes it is common to pipe the R object (i.e. __tibble__) to the first function like so:
-
-```{r first-pipe, echo=TRUE}
-hbr_maples |>
-  #View top 6 rows
-  head()
-```
-
-As you can see above pipes can be used for all functions, not just __tidyverse__ functions.
-
-When piping the piped object object is then used as the first argument/parameter of the following function.
-
-In the below code block use a pipe to summarise the columns of `hbr_maples` with the `summary()` function.
-
-```{r summary-pipe-exercise, exercise=TRUE, exercise.eval=FALSE}
-hbr_maples
-```
-
-```{r summary-pipe-exercise-solution}
-hbr_maples |>
-  #Summarise columns
-  summary()
-```
-
-### Multi step pipes
-
-The biggest benefit of pipes is being able to run multiple functions in a clear manner.
-
-Without pipes we can nest functions:
-
-__Note:__ The various `dplyr` functions will be explained later.
-
-```{r nested-function-example, echo=TRUE}
-summary(dplyr::select(dplyr::slice(dplyr::filter(hbr_maples, elevation == "Mid"), 1:60), c(leaf_dry_mass, stem_dry_mass)))
-```
-
-Or we can run each step separately, assigning where needed.
-
-```{r compart-functions-example, echo=TRUE}
-hbr_tbl <- dplyr::filter(hbr_maples, elevation == "Mid")
-hbr_tbl <- dplyr::slice(hbr_tbl,1:60)
-hbr_tbl <- dplyr::select(hbr_tbl, c(stem_length, corrected_leaf_area))
-summary(hbr_tbl)
-```
-
-However, piping is the nicest method as it:
-
-- Is clear and concise
-- Prevents us from making extra unnecessary object (`hbr_tbl`)
-- Can be easily edited
-- Can be nicely annotated
-
-```{r multi-pipe-functions-example, echo=TRUE}
-hbr_maples |>
-  #Filter to keep Mid elevation rows
-  dplyr::filter(elevation == "Mid") |>
-  #Slice out rows 1 to 60
-  dplyr::slice(1:60) |>
-  #Select specified columns
-  dplyr::select(c(stem_length, corrected_leaf_area)) |>
-  #Summarise columns
-  summary()
-```
 
 ### Pipe exercises
 
-Superb! As a challenge change the below code examples so it uses pipes from function to function.
+Read through the below link and use it as a guide to complete the challenges.
+
+[Pipes webpage](https://neof-workshops.github.io/Tidyverse/dplyr/pipes.html)
 
 The below code contains a lot of functions you haven't encountered or been taught yet.
 These will be covered later but you won't need to know how they work to convert the code to piped versions.
 
-The first code will show the top 6 rows of the watershed reference observations.
+### Challenge 1
+
+The below code will show the top 6 rows of the watershed reference observations.
+
+Unnest the following functions, converting the code to a piped version.
 
 ```{r pipe-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 head(dplyr::filter(hbr_maples, watershed == "Reference"))
@@ -148,7 +80,11 @@ hbr_maples |>
   head()
 ```
 
-The second code will remove rows with NAs, extract the leaf1area and leaf2area columns, then calculate the means of each column.
+### Challenge 2
+
+The challenge 2 code will remove rows with NAs, extract the leaf1area and leaf2area columns, then calculate the means of each column.
+
+Instead of assigning a new __tibble__ (`hbr_tbl`), pipe `hbr_maples` through the functions.
 
 ```{r pipe-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 #Drop rows with NAs
@@ -169,7 +105,11 @@ hbr_maples |>
   colMeans()
 ```
 
+### Challenge 3
+
 The third, and final, code keeps R2 transect rows, arranges the rows by stem_length, selects the 6th, 9th, and 10th columns, and slices out the bottom 8 rows.
+
+Unnest the nested functions and pipe `hbr_maples` through all the functions in the correct order.
  
 ```{r pipe-3-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_tbl <- dplyr::arrange(
@@ -190,7 +130,7 @@ hbr_maples |>
   dplyr::slice_tail(n = 8)
 ```
 
-Great going! 
+Great! 
 We'll continue to use pipes throughout this tutorial and further ones.
 Let's continue to row based functions.
 
@@ -198,7 +138,7 @@ Let's continue to row based functions.
 
 ### The four verbs
 
-There four main `dplyr` verbs (i.e. functions) to manipulate rows. These are:
+The four main `dplyr` verbs (i.e. functions) to manipulate rows are:
 
 - [__`arrange()`__](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html): Arrange the rows of a __tibble__. Can be used to reorder the rows based on the values of a column.
 - [__`distinct()`__](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html): Extracts unique/distinct rows from a __tibble__.
@@ -213,52 +153,18 @@ There four main `dplyr` verbs (i.e. functions) to manipulate rows. These are:
 
 The `arrange()` function allows you to arrange/order a __tibble__ by a specified column.
 
-### Examples
+### Arrange exercises
 
-We'll use the `lterdatasampler::knz_bison` __tibble__ for examples.
+Read through the below link and use it as a guide to complete the challenges.
 
-```{r knz-bison, echo=FALSE}
-knz_bison
-```
+[Dplyr arrange() page](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html)
 
-You can arrange by a numeric column.
-By default this is in ascending order (lowest to largest).
-
-```{r arrange-1, echo=TRUE}
-knz_bison |>
-  dplyr::arrange(rec_month)
-```
-
-You can arrange by a string column.
-
-```{r arrange-2, echo=TRUE}
-knz_bison |>
-  dplyr::arrange(animal_code)
-```
-
-You can arrange in descending order with the `desc()` function.
-
-```{r arrange-3, echo=TRUE}
-knz_bison |>
-  dplyr::arrange(desc(animal_code))
-```
-
-You can even arrange by multiple columns.
-The priority of ordering is based on the order of the columns, from high to low priority.
-
-```{r arrange-4, echo=TRUE}
-knz_bison |>
-  dplyr::arrange(animal_weight, rec_year)
-```
-
-### Exercises
-
-With the above guidance and [the `arrange()` tidyverse webpage](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html) please attempt the below challenges.
+### Challenge 1
 
 Arrange the `hbr_maples` __tibble__ by its "stem_length" column in ascending order.
 
 ```{r arrange-1-exercise, exercise=TRUE, exercise.eval=FALSE}
-hbr_maples |>
+hbr_maples
 ```
 
 ```{r arrange-1-exercise-solution}
@@ -268,10 +174,12 @@ hbr_maples |>
   dplyr::arrange(stem_length)
 ```
 
+### Challenge 2
+
 Arrange the `hbr_maples` __tibble__ by its "watershed" column in descending order.
 
 ```{r arrange-2-exercise, exercise=TRUE, exercise.eval=FALSE}
-hbr_maples |>
+hbr_maples
 ```
 
 ```{r arrange-2-exercise-solution}
@@ -280,8 +188,23 @@ hbr_maples |>
   dplyr::arrange(desc(watershed))
 ```
 
+### Challenge 3
+
+Arrange the `hbr_maples` __tibble__ by the "year" column (ascending, higher priority) and by the "leaf_dry_mass" column (descending, lower priority).
+
+```{r arrange-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples
+```
+
+```{r arrange-3-exercise-solution}
+hbr_maples |>
+  #Arrange by year in ascending order
+  # and by leaf_dry_mass in descending order
+  dplyr::arrange(year, desc(leaf_dry_mass))
+```
+
 Magnificent!
-Next is `distinct().
+Next is `distinct()`.
 
 ## distinct()
 
@@ -292,9 +215,11 @@ Next is `distinct().
 The `dplyr::distinct()` function extracts unique/distinct rows from a __tibble__.
 This is not commonly used but is very handy when you have duplicated rows in your __tibble__.
 
-[Tidyverse distinct() webpage](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html)
+### Example
 
-We can manipulate the `lterdatasampler::knz_bison()` __tbl__ to duplicate the first 5 rows.
+Rather than challenges please look at the quick example.
+
+We can manipulate the `lterdatasampler::knz_bison()` __tibble__ to duplicate the first 5 rows.
 
 ```{r knz-bison-2, echo=TRUE}
 knz_bison |>
@@ -314,10 +239,435 @@ knz_bison |>
 
 It is a fairly straightforward command so we'll move onto `filter()`.
 
+For further examples please see:
+
+[Dplyr distinct() webpage](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html)
+
 ## filter()
 
 <center>
 ![](./images/dplyr_filter.png){style="width:150px"}
 </center>
 
-[Tidyverse filter() page](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html)
+To filter rows with a condition based on a column we can use the `dplyr::filter()` function.
+This includes:
+
+- Filtering rows by numerics in a row, e.g. extract rows from years >= 2000.
+- Extracting rows belonging to certain groups of metadata.
+
+### Filter exercise
+
+As the `filter()` function is incredibly useful the below challenges are quite difficult.
+
+Read through and use the guidance in the below link to complete the challenges.
+
+[Dplyr filter() page](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html)
+
+__Tip:__ You can run the below code block before typing any code to view the initial __tibbles__.
+
+### Challenge 1
+
+Retain observations/rows with a "leaf_dry_mass" less than or equal to 0.015.
+
+```{r filter-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples
+```
+
+```{r filter-1-exercise-solution}
+hbr_maples |>
+  #Filter to keep leaf_dry_mass greater or equal to 0.015
+  dplyr::filter(leaf_dry_mass >= 0.015)
+```
+
+### Challenge 2
+
+Remove observations/rows with "Reference" as their "watershed" value.
+
+```{r filter-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+hbr_maples
+```
+
+```{r filter-2-exercise-solution}
+hbr_maples |>
+  #Filter to remove Reference watershed observations
+  dplyr::filter(watershed != "Reference")
+```
+
+### Challenge 3
+
+Carry out the following filtering steps on `knz_bison`:
+
+1. Retain only the male rows.
+2. Retain observations from the year ("rec_year") 1998 or later.
+3. Retain animals with a weight range of 200 to 250
+
+```{r filter-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+knz_bison
+```
+
+```{r filter-3-exercise-solution}
+knz_bison |>
+  #Retain males
+  dplyr::filter(animal_sex == "M") |>
+  #Retain recordings from 1998 onwards
+  dplyr::filter(rec_year >= 1998) |>
+  #Retain animal weight from 200 to 250
+  dplyr::filter(animal_weight >= 200 & animal_weight <= 250)
+```
+
+### Challenge 4
+
+Carry out the following filtering steps on `crop_and_soil_tbl`:
+
+1. Retain soil types: Sandy, Loamy, and Clayey.
+2. Remove Urea Fertiliser rows.
+3. Retain rows with a Nitrogen value greater than 20 or a Potassium value greater than 10
+
+```{r filter-4-exercise, exercise=TRUE, exercise.eval=FALSE}
+crop_and_soil_tbl
+```
+
+```{r filter-4-exercise-solution}
+#Soil vec
+soils <- c("Sandy", "Loamy", "Clayey")
+crop_and_soil_tbl |>
+  #Filter soil types
+  dplyr::filter(Soil_type %in% soils) |>
+  #Remove Urea fertiliser
+  dplyr::filter(Fertiliser != "Urea") |>
+  #Retain nitrogen greater than 20 or potassium greater than 10
+  dplyr::filter(Nitrogen > 20 | Potassium > 10)
+```
+
+Magnificent!
+Next its time to `slice()`.
+
+## slice()
+<center>
+![](./images/dplyr_slice.png){style="width:150px"}
+</center>
+
+The base `slice()` functions allows you extract rows by their index similar to `tbl[,column_index]`.
+However, it is particularly useful within tidyverse as you can pipe to a slice.
+
+On top of the base `slice()` function there are a variety with different applications:
+
+- `slice()`: Index rows by numeric index location.
+- `slice_head()`: Select rows from the top of the __tibble__.
+- `slice_tail()`: Select rows from the bottom of the __tibble__.
+- `slice_sample()`: Randomly select rows.
+- `slice_min()`: Select rows with smallest values of variable.
+- `slice_max()`: Select rows with largest values of a variable.
+
+### Slice exercise
+
+Read through the below link and attempt the below challenges.
+
+[Dplyr slice() page](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html)
+
+### Challenge 1
+
+Extract rows 10 to 17 of `mammal_sleep_tbl`.
+
+```{r slice-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r slice-1-exercise-solution}
+mammal_sleep_tbl |>
+  #Extract row 10 to 17
+  dplyr::slice(10:17)
+```
+
+### Challenge 2
+
+Extract the top 4 rows of `mammal_sleep_tbl`.
+
+```{r slice-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r slice-2-exercise-solution}
+mammal_sleep_tbl |>
+  #Extract top 4 rows
+  dplyr::slice_head(n=4)
+```
+
+### Challenge 3
+
+Extract the 6 rows with the highest "brain_wt" values.
+
+```{r slice-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r slice-3-exercise-solution}
+mammal_sleep_tbl |>
+  #Extract the 6 observations with the largest brain_wt
+  dplyr::slice_max(brain_wt, n=6)
+```
+
+### Row quiz
+
+Brilliant!
+Before moving onto column functions please attempt the below MCQs.
+
+```{r row-mcq-1, echo=FALSE}
+question("Which function can subset rows by indexes?",
+  answer("`arrange()`"),
+  answer("`filter()`"),
+  answer("`slice()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r row-mcq-2, echo=FALSE}
+question("Which function can order rows by a specific column?",
+  answer("`arrange()`", correct = TRUE),
+  answer("`filter()`"),
+  answer("`slice()`"),
+  allow_retry = TRUE
+)
+```
+
+```{r row-mcq-3, echo=FALSE}
+question("Which function can extract rows using conditions on columns?",
+  answer("`arrange()`"),
+  answer("`filter()`", correct = TRUE),
+  answer("`slice()`"),
+  allow_retry = TRUE
+)
+```
+
+## Column functions
+
+### The six verbs
+
+The six main verbs (i.e. functions) to manipulate columns are:
+
+- [__`glimpse()`__](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html): Print a __tibble__ in a transposed manner. Useful for seeing the data types of all the columns.
+- [__`mutate()`__](https://neof-workshops.github.io/Tidyverse/dplyr/mutate.html): Mutate columns to create new columns based on existing ones, modify existing columns, and delete columns.
+- [__`pull()`__](https://neof-workshops.github.io/Tidyverse/dplyr/pull.html): Pull out a single column from a __tibble__, resulting in a __vector__.
+- [__`relocate()`__](https://neof-workshops.github.io/Tidyverse/dplyr/relocate.html): Relocate columns. You can relocate columns to the start or end, and you can move them after or before specified columns.
+- [__`rename()`__](https://neof-workshops.github.io/Tidyverse/dplyr/rename.html): Rename columns in a __tibble__.
+- [__`select()`__](https://neof-workshops.github.io/Tidyverse/dplyr/select.html): Select specific columns of a __tibble__. Can be used with a variety of helper functions such as `starts_with()`, `ends_with()`, `contains()`, and `matches()`.
+
+On top of these functions the exercises will also use the row functions we've covered to reinforce learning.
+It also allows us to make even more interesting and useful piped code.
+
+## glimpse()
+
+<center>
+![](./images/dplyr_glimpse.png){style="width:150px"}
+</center>
+
+The function `dplyr::glimpse()` allows you to print __tibbles__ in a transposed manner.
+This will allow you to view all the columns with their data type and some of the first values.
+
+[Dplyr glimpse() page](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html)
+
+Below is an example of glimpsing the `lterdatasampler::hbr_maples` __tibble__.
+
+```{r glimpse, echo=TRUE}
+hbr_maples |> dplyr::glimpse()
+```
+
+Rather than continue in alphabetical order we'll next go onto `select()`.
+
+## select()
+
+<center>
+![](./images/dplyr_select.png){style="width:150px"}
+</center>
+
+The function `dplyr::select()` allows you to select columns/variables from a __tibble__.
+There are many different ways to do this with various helper functions.
+
+When subsetting with `dplyr::select()` the resulting object will always be a __tibble__.
+
+The functions `slice()` and `select()` can be used with pipes to subset rows and columns.
+
+### Select exercise
+
+There are a variety of ways to use `select()`.
+As it is a commonly used function there will be 6 challenges which will also incorporate the row functions.
+
+Read through and use the guidance in the below link to complete the challenges.
+
+[Dplyr select() page](https://neof-workshops.github.io/Tidyverse/dplyr/select.html)
+
+__Tip:__ Use [the main dplyr page](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html) to get an overview of all the `dplyr` functions.
+
+### Challenge 1
+
+Subset the __tibble__ from of `crab_age_pred_tbl` to only retain the "Diameter" column.
+
+```{r select-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+crab_age_pred_tbl
+```
+
+```{r select-1-exercise-solution}
+#Select diamter column
+crab_age_pred_tbl |> select(Diameter)
+```
+
+### Challenge 2
+
+Select the columns "Family" to "Body_size_mm" from the `amphibian_div_tbl` __tibble__.
+
+```{r select-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+amphibian_div_tbl
+```
+
+```{r select-2-exercise-solution}
+amphibian_div_tbl |>
+  #Select columns Family to Body_size_mm
+  dplyr::select(Family:Body_size_mm)
+```
+
+### Challenge 3
+
+Extract the top 10 rows of columns "Crop_type", "Humidity", and "Nitrogen" from the __tibble__ `crop_and_soil_tbl`.
+
+```{r select-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+crop_and_soil_tbl
+```
+
+```{r select-3-exercise-solution}
+crop_and_soil_tbl |>
+  #Select Crop_type, Humidity, and Nitrogen columns
+  dplyr::select(Crop_type, Humidity, Nitrogen) |>
+  #Slice to retain rows 1 to 10
+  dplyr::slice(1:10)
+```
+
+### Challenge 4
+
+Extract all the columns with a name that starts with "cap" from `mushroom_tbl`.
+Then only retain rows where the "cap_color" is "red.
+
+```{r select-4-exercise, exercise=TRUE, exercise.eval=FALSE}
+mushroom_tbl
+```
+
+```{r select-4-exercise-solution}
+mushroom_tbl  |>
+  #Select columns that start with cap
+  dplyr::select(starts_with("cap"))  |>
+  #Filter to retain red cap_color rows
+  dplyr::filter(cap_color == "red")
+```
+
+### Challenge 5
+
+Remove the columns "total_sleep" and "gestation" from `mammal_sleep_tbl`.
+Subsequently arrange the __tibble__ by the "brain_wt" column in descending order.
+
+```{r select-5-exercise, exercise=TRUE, exercise.eval=FALSE}
+vars  <- c("total_sleep","gestation")
+mammal_sleep_tbl
+```
+
+```{r select-5-exercise-solution}
+#Vector of column names to remove
+vars  <- c("total_sleep","gestation")
+mammal_sleep_tbl |>
+  #Remove specified columns
+  dplyr::select(-any_of(vars)) |>
+  #Arrange by brain_wt in descending order
+  dplyr::arrange(desc(brain_wt))
+```
+
+### Challenge 6
+
+With `select()` retain the columns "date" and "site", and any columns that contain "temp" in their name from `pie_crab`.
+Afterwards ensure you only have unique rows.
+
+```{r select-6-exercise, exercise=TRUE, exercise.eval=FALSE}
+pie_crab
+```
+
+```{r select-6-exercise-solution}
+pie_crab |>
+  #Select date and site column as well as columns containing temp
+  dplyr::select(c(date,site,contains("temp"))) |>
+  #Keep only distinct/unique rows
+  dplyr::distinct()
+```
+
+Amazing!
+Next you'll mutate columns.
+
+## mutate()
+
+<center>
+![](./images/dplyr_mutate.png){style="width:150px"}
+</center>
+
+The function `dplyr::mutate()` allows you to:
+
+- Create new columns based on existing columns.
+- Modify existing columns
+- Delete columns
+- Modify multiple columns at once with `dplyr::across()`
+
+### Mutate exercise
+
+The `mutate()` function allows you to carry out a variety of tasks.
+
+Read through and use the guidance in the below link to complete the challenges.
+
+[Dplyr mutate() page](https://neof-workshops.github.io/Tidyverse/dplyr/mutate.html)
+
+### Challenge 1
+
+Round the values in the "air_temp" column of `pie_crab`.
+
+```{r mutate-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+pie_crab
+```
+
+```{r mutate-1-exercise-solution}
+pie_crab |>
+  #Round the air_temp values
+  dplyr::mutate(air_temp = round(air_temp))
+```
+
+### Challenge 2
+
+Create a new column in the subset `crab_age_pred_tbl` called "Weight_lbs" that contains the weight in pounds.
+The original "Weight" column is in ounces (16 ounces per pound).
+
+```{r mutate-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+crab_age_pred_tbl |>
+  select(Length:Weight)
+```
+
+```{r mutate-2-exercise-solution}
+crab_age_pred_tbl |>
+  #Select columns Length to Weight
+  select(Length:Weight) |>
+  #Create a new column called Weight_lbs
+  #Mutated from Weight column (ounces)
+  mutate(Weight_lbs = Weight/16)
+```
+
+### Challenge 3
+
+Convert the "Length", "Diameter", and "Height" columns in the subset `crab_age_pred_tbl` to centimetres.
+The original values are in feet (1 foot = 30.48 cms)
+
+```{r mutate-3-exercise, exercise=TRUE, exercise.eval=FALSE}
+crab_age_pred_tbl |>
+  select(Length:Weight)
+```
+
+```{r mutate-3-exercise-solution}
+crab_age_pred_tbl |>
+  #Select columns Length to Weight
+  select(Length:Weight) |>
+  mutate(dplyr::across(c(Length, Diameter, Height), \(x) x*30.48))
+```
+
+
+

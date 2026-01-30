@@ -119,18 +119,25 @@ if (window.hljs) {
 <ul>
 <li><strong>Overview:</strong> The what and why of tibbles.</li>
 <li><strong>Creating tibbles:</strong> Commands to create tibbles.</li>
+<li><strong>Structure:</strong> The features of tibble.</li>
+<li><strong>Subsetting:</strong> How to subset tibbles similar to
+data.frames.</li>
+<li><strong>Printing or viewing:</strong> How tibbles are
+displayed/printed in R.</li>
+<li><strong>Adding rows and columns:</strong> Brief intro to adding new
+rows and columns to a tibbles.</li>
 </ul>
 <p><a
-href="https://neof-workshops.github.io/Tidyverse/tibble/tibble.html">NEOF
-Tidyverse website reference</a></p>
+href="https://neof-workshops.github.io/Tidyverse/tibble/tibble.html">Tidyverse
+Tibble page</a></p>
 <div id="section-overview" class="section level3">
 <h3>Overview</h3>
 <p>A <strong>tibble</strong> (<code>tbl</code>) is a reimagining of the
 <strong>data.frame</strong> (<code>df</code>) object. They are described
 as <strong>data.frames</strong> that are:</p>
 <ul>
-<li><strong>Lazy</strong>: They don’t change variable names and they
-partial matching does not work.</li>
+<li><strong>Lazy</strong>: They don’t change variable names and partial
+matching does not work.</li>
 <li><strong>Surly</strong>: They complain more such as when a variable
 does not exist.</li>
 </ul>
@@ -182,9 +189,11 @@ three methods:</p>
 <li>Reading in a file as a <strong>tibble</strong></li>
 </ul>
 <p>In this section you will be given instructions to create tibbles. You
-will need to use the pre made code and the guidance on the <a
-href="https://neof-workshops.github.io/Tidyverse/tibble/creating_tibbles.html">creating
-tibbles webpage</a> to carry out the exercises.</p>
+will need to use the pre made code and the guidance on the below link to
+carry out the exercises.</p>
+<p><a
+href="https://neof-workshops.github.io/Tidyverse/tibble/creating_tibbles.html">Creating
+tibbles page</a></p>
 <div id="section-code-to-tibble" class="section level3">
 <h3>Code to tibble</h3>
 <p>Create and display the below tibble:</p>
@@ -195,7 +204,7 @@ tibbles webpage</a> to carry out the exercises.</p>
 ## 2 February  207639 2131628 301583
 ## 3 March     198745 2086237 299710</code></pre>
 <p>by completing the below code:</p>
-<p><strong>Tip:</strong> Remeber to use <code>print()</code> to print
+<p><strong>Tip:</strong> Remember to use <code>print()</code> to print
 your <strong>tibble</strong>.</p>
 <div class="tutorial-exercise" data-label="code-to-tbl-exercise"
 data-completion="1" data-diagnostics="1" data-startover="1"
@@ -337,9 +346,10 @@ chr, etc.).</li>
 ## 5          5           3.6          1.4         0.2 setosa 
 ## 6          5.4         3.9          1.7         0.4 setosa</code></pre>
 <p>For more details on the <strong>tibble</strong> structure and to see
-how they are normally presented please see <a
-href="https://neof-workshops.github.io/Tidyverse/tibble/structure.html">the
-tibble structure page on the tidyverse site</a>.</p>
+how they are normally presented please see the below link:</p>
+<p><a
+href="https://neof-workshops.github.io/Tidyverse/tibble/structure.html">Tibbles
+structure page</a></p>
 </div>
 <div id="section-quiz-1" class="section level3">
 <h3>Quiz</h3>
@@ -386,23 +396,23 @@ methods as you would for a <strong>data.frame</strong>.</p>
 <li><code>tbl$column_name</code>: This produces a
 <strong>vector</strong> from the specified column.</li>
 <li><code>tbl[rows,columns]</code>: This always produces a
-<strong>tibble</strong> unless you only specify one element which
-becomes a <strong>scalar</strong>.
+<strong>tibble</strong>.
 <ul>
 <li>Numbers can be used to represent row or column indexes.</li>
 <li>Strings can be used for columns based on their names.</li>
 </ul></li>
 </ul>
-<p>For more details and help for the following exercises please see <a
-href="https://neof-workshops.github.io/Tidyverse/tibble/subsetting.html">the
-tidyverse tibble subsetting page</a>.</p>
+<p>For more details and help for the following exercises please see the
+below link:</p>
+<p><a
+href="https://neof-workshops.github.io/Tidyverse/tibble/subsetting.html">Tibbles
+subsetting page</a></p>
 </div>
 <div id="section-subsetting-exercises" class="section level3">
 <h3>Subsetting exercises</h3>
 <p>For the exercises we’ll use the tibble
 <code>mgrtibbles::mammal_sleep_tbl</code> which contains information on
 the amount of average sleep of various mammals.</p>
-<pre class="r"><code>print(mammal_sleep_tbl)</code></pre>
 <pre><code>## # A tibble: 62 × 11
 ##    species          body_wt brain_wt non_dreaming dreaming total_sleep life_span
 ##    &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
@@ -454,7 +464,7 @@ data-lines="0" data-pipe="|&gt;">
 </div>
 <div id="section-extract-with-1" class="section level3">
 <h3>Extract with <code>[,]</code></h3>
-<p>Print the element in row 1 and column 2 as a scalar.</p>
+<p>Print the element in row 1 and column 2.</p>
 <div class="tutorial-exercise" data-label="scalar-subset-exercise"
 data-completion="1" data-diagnostics="1" data-startover="1"
 data-lines="0" data-pipe="|&gt;">
@@ -467,8 +477,7 @@ data-diagnostics="1" data-startover="1" data-lines="0"
 data-pipe="|&gt;">
 <pre class="text"><code>print(mammal_sleep_tbl[1,2])</code></pre>
 </div>
-<p>Print rows 2 to 4 and columns 9 to 11 as a
-<strong>tibble</strong>.</p>
+<p>Print rows 2 to 4 and columns 9 to 11.</p>
 <div class="tutorial-exercise" data-label="tbl-extract-one-exercise"
 data-completion="1" data-diagnostics="1" data-startover="1"
 data-lines="0" data-pipe="|&gt;">
@@ -481,8 +490,7 @@ data-diagnostics="1" data-startover="1" data-lines="0"
 data-pipe="|&gt;">
 <pre class="text"><code>print(mammal_sleep_tbl[2:4,9:11])</code></pre>
 </div>
-<p>Print the columns of “body_wt” and “life_span” as a
-<strong>tibble</strong>.</p>
+<p>Print the columns of “body_wt” and “life_span”.</p>
 <div class="tutorial-exercise" data-label="tbl-extract-two-exercise"
 data-completion="1" data-diagnostics="1" data-startover="1"
 data-lines="0" data-pipe="|&gt;">
@@ -562,9 +570,10 @@ narrow columns may fit where only 5 wide columns could fit).</li>
 <li><strong>Length:</strong> By default a maximum of 10 rows will be
 displayed.</li>
 </ul>
-<p>For more detail please <a
-href="https://neof-workshops.github.io/Tidyverse/tibble/printing.html">the
-printing or view page on the tidyverse site</a></p>
+<p>For more detail please see:</p>
+<p><a
+href="https://neof-workshops.github.io/Tidyverse/tibble/printing.html">Tibbles
+printing or viewing page</a></p>
 </div>
 <div id="section-adding-rows-and-columns" class="section level2">
 <h2>Adding rows and columns</h2>
@@ -580,16 +589,17 @@ functions:</p>
 <p>However there are other functions in the next tutorial that tend to
 be more useful so we won’t go into these 2 <code>tibble</code> functions
 here.</p>
-<p>If you are more interested please see <a
-href="https://neof-workshops.github.io/Tidyverse/tibble/add_rows_and_columns.html">the
-adding rows and columns page on the tidyverse site</a>.</p>
+<p>If you are more interested please see the below link:</p>
+<p><a
+href="https://neof-workshops.github.io/Tidyverse/tibble/add_rows_and_columns.html">Tibbles
+adding rows or columns page</a></p>
 </div>
 <div id="section-finish" class="section level2">
 <h2>Finish</h2>
 <p>Thanks and great going completing this tutorial. With this overview
 of tibbles done you can move onto the next <code>learnr</code> tutorial
 covering the very powerful and flexible <a
-href="https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html"><code>dplyr</code></a>
+href="https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html"><code>dplyr</code></a>.
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
@@ -757,13 +767,13 @@ learnr:::store_exercise_cache(structure(list(label = "df-to-tbl-exercise", globa
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "create-tbl-mcq-1", 
     question = structure("When creating a tibble from vectors, what do the vectors become?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_77743cb", 
+    "character")), answers = list(structure(list(id = "lnr_ans_540946a", 
         option = "Columns", value = "Columns", label = structure("Columns", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e76e029", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c7d9a", 
         option = "Rows", value = "Rows", label = structure("Rows", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_63a1787", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4206996", 
         option = "Row names", value = "Row names", label = structure("Row names", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -774,7 +784,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "create-tbl-mcq-1-answer", question = "create-tbl-mcq-1"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1239937216.92261, options = list()), class = c("learnr_radio", 
+    seed = 1151502985.46379, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -782,13 +792,13 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "create-tbl-mcq-2", 
     question = structure("What do tibbles not have?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4db0181", 
+    "character")), answers = list(structure(list(id = "lnr_ans_e43c272", 
         option = "Columns", value = "Columns", label = structure("Columns", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ac4d2e7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c4fbbcb", 
         option = "Rows", value = "Rows", label = structure("Rows", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9de8a9b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_97ce4af", 
         option = "Row names", value = "Row names", label = structure("Row names", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -799,22 +809,22 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "create-tbl-mcq-2-answer", question = "create-tbl-mcq-2"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 701916893.173144, options = list()), class = c("learnr_radio", 
+    seed = 1620021253.24562, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "create-tbl-mcq-3", 
     question = structure("What function can be used to create a tibble from vectors?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_3f9be61", 
+    "character")), answers = list(structure(list(id = "lnr_ans_84c1cf4", 
         option = "`tibble::as_tibble()`", value = "`tibble::as_tibble()`", 
         label = structure("<code>tibble::as_tibble()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_332c2bb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8c913f7", 
         option = "`tibble::read_csv()`", value = "`tibble::read_csv()`", 
         label = structure("<code>tibble::read_csv()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_790f6ba", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e3b9b98", 
         option = "`tibble::tibble()`", value = "`tibble::tibble()`", 
         label = structure("<code>tibble::tibble()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
@@ -826,7 +836,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "create-tbl-mcq-3-answer", question = "create-tbl-mcq-3"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 153268578.928629, options = list()), class = c("learnr_radio", 
+    seed = 1863513038.63223, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -834,15 +844,15 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "create-tbl-mcq-4", 
     question = structure("What function can be used to convert a data.frame to a tibble?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_b8794af", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9e44a2d", 
         option = "`tibble::as_tibble()`", value = "`tibble::as_tibble()`", 
         label = structure("<code>tibble::as_tibble()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_65f4379", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e57a1f", 
         option = "`tibble::read_csv()`", value = "`tibble::read_csv()`", 
         label = structure("<code>tibble::read_csv()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a756917", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_97944c5", 
         option = "`tibble::tibble()`", value = "`tibble::tibble()`", 
         label = structure("<code>tibble::tibble()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
@@ -854,20 +864,20 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "create-tbl-mcq-4-answer", question = "create-tbl-mcq-4"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1060620873.00611, options = list()), class = c("learnr_radio", 
+    seed = 1232601383.42603, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "str-tbl-mcq-1", 
     question = structure("The top line of a printed tibble shows?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_c43956f", 
+    "character")), answers = list(structure(list(id = "lnr_ans_ec13f5d", 
         option = "Data class", value = "Data class", label = structure("Data class", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_73520c9", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_309ac68", 
         option = "Size info", value = "Size info", label = structure("Size info", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_183b0b5", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7c71fc0", 
         option = "Variables", value = "Variables", label = structure("Variables", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -878,7 +888,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "str-tbl-mcq-1-answer", question = "str-tbl-mcq-1"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 906736923.077768, options = list()), class = c("learnr_radio", 
+    seed = 301759996.359482, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -886,13 +896,13 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "str-tbl-mcq-2", 
     question = structure("Rows are observations. What are columns?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_2d0754f", 
+    "character")), answers = list(structure(list(id = "lnr_ans_20aef8a", 
         option = "Data class", value = "Data class", label = structure("Data class", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f30306f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7edcfc8", 
         option = "Size info", value = "Size info", label = structure("Size info", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d92f731", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b5d8bf9", 
         option = "Variables", value = "Variables", label = structure("Variables", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -903,20 +913,20 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "str-tbl-mcq-2-answer", question = "str-tbl-mcq-2"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1728415614.69514, options = list()), class = c("learnr_radio", 
+    seed = 520953999.757412, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "str-tbl-mcq-3", 
     question = structure("What is displayed below each column name?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_c4dd87f", 
+    "character")), answers = list(structure(list(id = "lnr_ans_6e75081", 
         option = "Data class", value = "Data class", label = structure("Data class", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_da24b17", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fd48a49", 
         option = "Size info", value = "Size info", label = structure("Size info", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_da35537", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2e7a3e5", 
         option = "Variables", value = "Variables", label = structure("Variables", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -927,7 +937,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "str-tbl-mcq-3-answer", question = "str-tbl-mcq-3"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 875074336.092512, options = list()), class = c("learnr_radio", 
+    seed = 350296640.33688, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -1181,13 +1191,13 @@ learnr:::store_exercise_cache(structure(list(label = "tbl-extract-three-exercise
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "sub-tbl-mcq-1", 
     question = structure("Subsetting multiple elements with <code>[,]<\u002fcode> produces a:", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_e580008", 
+    "character")), answers = list(structure(list(id = "lnr_ans_87cf943", 
         option = "Scalar", value = "Scalar", label = structure("Scalar", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bcb857a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1077ee5", 
         option = "Tibble", value = "Tibble", label = structure("Tibble", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ff562fe", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_66105ef", 
         option = "Vector", value = "Vector", label = structure("Vector", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1198,20 +1208,20 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "sub-tbl-mcq-1-answer", question = "sub-tbl-mcq-1"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 2075753774.5334, options = list()), class = c("learnr_radio", 
+    seed = 35381391.9835243, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "sub-tbl-mcq-2", 
     question = structure("Subsetting by a column name with <code>$<\u002fcode> produces a:", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_db9d1a8", 
+    "character")), answers = list(structure(list(id = "lnr_ans_779de96", 
         option = "Scalar", value = "Scalar", label = structure("Scalar", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_da56673", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_39179a7", 
         option = "Tibble", value = "Tibble", label = structure("Tibble", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae354f8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_52e4a97", 
         option = "Vector", value = "Vector", label = structure("Vector", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1222,7 +1232,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "sub-tbl-mcq-2-answer", question = "sub-tbl-mcq-2"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 408980894.309553, options = list()), class = c("learnr_radio", 
+    seed = 335541247.843751, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -1230,13 +1240,13 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "sub-tbl-mcq-3", 
     question = structure("Subsetting one element with <code>[,]<\u002fcode> produces a:", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_41d4b61", 
+    "character")), answers = list(structure(list(id = "lnr_ans_38e1a40", 
         option = "Scalar", value = "Scalar", label = structure("Scalar", html = TRUE, class = c("html", 
-        "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9a41624", 
-        option = "Tibble", value = "Tibble", label = structure("Tibble", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f0c92ea", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_925b2f8", 
+        option = "Tibble", value = "Tibble", label = structure("Tibble", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_729b6dc", 
         option = "Vector", value = "Vector", label = structure("Vector", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1247,7 +1257,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
     "character")), message = NULL, post_message = NULL), ids = list(
         answer = "sub-tbl-mcq-3-answer", question = "sub-tbl-mcq-3"), 
     loading = NULL, random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1931790998.10044, options = list()), class = c("learnr_radio", 
+    seed = 209100697.90263, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 </p>
