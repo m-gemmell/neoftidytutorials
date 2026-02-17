@@ -947,7 +947,7 @@ bat_uk_non_mainland_tbl
 
 ### Challenge 2
 
-Carry out the following tasks with the created `bat_tbl`:
+Carry out the following tasks with the created `mammal_sleep_tbl`:
 
 1.  Create a **tibble** called `mammal_wt_tbl` only containing the rows for the top 10 dreamers (i.e. top 10 highest "dreaming" values). -
     -   Ensure the **tibble** only contains the rows "species", "body_wt", and "brain_wt".
@@ -989,3 +989,18 @@ mammal_top_sleepers <-
   dplyr::rename(species=species...1)
 mammal_top_sleepers
 ```
+
+Superb!
+
+## Finish
+
+<center>![](./images/finish_flag.png){style="width:150px"}</center>
+
+Excellent work on completing the `dplyr` tutorial.
+You've gone through pipes, row and column functions, grouping, and binding of tibbles.
+It is a lot but the main website will act as a "cookbook for your future reference.
+I find it hard myself to remember the names of the functions and how they all work so I constantly refer to it as I carry otu my R coding.
+
+The next tutorial will be a much smaller one focussing on `tidyr` which will me incredibly useful for the `ggplot2` tutorial.
+
+

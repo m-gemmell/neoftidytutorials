@@ -1,0 +1,177 @@
+---
+title: "Tidyr tutorial"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    css: css/style.scss
+runtime: shiny_prerendered
+favicon: images/NEOF_favicon.png
+description: >
+  Tutorial covering tidyr package 
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+learnr::tutorial_options(exercise.completion = FALSE)
+library(tidyverse)
+library(lterdatasampler)
+library(mgrtibbles)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Tidyr
+
+<center>![](./images/tidyr.png){style="width:150px"}</center>
+
+This tutorial covers the `tidyr` package.
+Its purposes is to create tidy data which has three main features:
+
+- Each variable is a column; each column is a variable
+- Each observation is a row; each row is an observation
+- Each value is a cell; each cell is a single value
+
+Tidy data is particularly important for using `ggplot2` for making data visualisations.
+
+This tutorial will have three main sections:
+
+- __Pivoting:__ Changing the structure of a __tibble__ to long or wide
+  - `ggplot2` requires data/tibbles to be long
+- __Character vectors:__ Separating and uniting character columns
+- __Missing values:__ Removing or replacing NAs in tibbles.
+
+[Tidyverse Tidyr page](https://neof-workshops.github.io/Tidyverse/tidyr/tidyr.html)
+
+## Long versus wide
+
+__Wide__ and __long__ data/tables contain the same information but are structured differently.
+
+### Wide
+
+__Wide__ data is great for humans to read but is not optimal for manipulation and analysis with `tidyverse` packages.
+
+__Wide__ data contains multiple columns of the same metric.
+It is what most people are familiar with when looking at data in a table.
+
+Below is an example of a __wide tibble__.
+It shows the captured production of fisheries in metric tons. 
+
+```{r wide-tibble}
+#Countries to filter
+countries <- c("Afghanistan", "Albania", "Algeria", "Andorra")
+fisheries_wide_tbl |>
+  dplyr::filter(Entity %in% countries)
+```
+
+The __wide tibble__ is quite easy to read and you can quickly find the value of the entity and year you are interested in visually.
+The features of this wide __tibble__ include:
+
+- One row per Entity
+- One column per Year
+- The metric ton values are spread throughout columns and rows.
+
+### Long
+
+__Long__ data is not very human readable, being very long/tall, but is required for `tidyverse` packages and is easier to manipulate.
+
+__Long__ data has each observation/value is in its own row.
+There will be multiple columns of metadata but only one row of the values of interest.
+
+Below is an example of a __long tibble__ containing the same data as the __wide tibble__ above:
+
+```{r long-tibble}
+#Countries to filter
+countries <- c("Afghanistan", "Albania", "Algeria", "Andorra")
+fisheries_long_tbl |>
+  dplyr::filter(Entity %in% countries)
+```
+
+The __long tibble__ is harder to read but much better suited for `tidyverse`.
+In fact, the previous tutorials have all been using __long tibbles__.
+
+Features of the __long tibble__ include:
+
+- Each observation (Metric_tons) is in its own row
+- There are multiple rows per Entity
+- The Year values are in their own column rather than being column names
+
+Due to these differences the __long tibble__ has more rows (226 vs 4) whilst the __wide tibble__ has more columns (60 vs 3 ).
+In other words, the __long tibble__ is longer and the __wide tibble__ is wider.
+
+
+## pivot_longer()
+
+<center>![](./images/tidyr_pivot_longer.png){style="width:150px"}</center>
+
+The `pivot_longer()` function is a relatively straightforward function for longifying a tibble.
+
+### Pivot longer exercises
+
+Read through the below link and use it as a guide to complete the challenges.
+
+[Tidyr pivot_longer() page](https://neof-workshops.github.io/Tidyverse/tidyr/pivot_longer.html)
+
+### Challenge 1
+
+Longify the tibble `bat_roost_wide_tbl` so you have the following columns:
+
+- __Area__
+- __Species:__ The Species names, currently set as column names
+- __MeanMaxCountInAnyYear:__ The Mean max count in any year, currently set as values
+
+```{r longer-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+bat_roost_wide_tbl
+```
+
+```{r longer-1-exercise-solution}
+bat_roost_wide_tbl |>
+  #Longify tibble
+  tidyr::pivot_longer(!Area, names_to="Species", values_to="MeanMaxCountInAnyYear")
+```
+
+### Challenge 2
+
+Create the below long tibble with the wide tibble, `living_planet_wide_tbl`.
+
+```{r living-long-tbl}
+living_planet_wide_tbl |>
+  tidyr::pivot_longer(!Region, names_to="Year", values_to="AverageIndex")
+```
+
+```{r longer-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+living_planet_wide_tbl
+```
+
+```{r longer-2-exercise-solution}
+living_planet_wide_tbl |>
+  #Longify tibble
+  tidyr::pivot_longer("1970":"2018", names_to="Year", values_to="AverageIndex")
+```
+
+## pivot_wider()
+
+<center>![](./images/tidyr_pivot_wider.png){style="width:150px"}</center>
+
+The `pivot_wider()` function is a relatively straightforward function for widening a tibble.
+
+### Pivot longer exercises
+
+Read through the below link and use it as a guide to complete the challenges.
+
+[Tidyr pivot_longer() page](https://neof-workshops.github.io/Tidyverse/tidyr/pivot_longer.html)
+
+### Challenge 1
+
+
+
+
+
+
+
+
+
+
+
