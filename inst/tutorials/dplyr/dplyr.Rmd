@@ -133,7 +133,68 @@ hbr_maples |>
 
 Great!
 We'll continue to use pipes throughout this tutorial and further ones.
-Let's continue to row based functions.
+Let's continue.
+
+## Column/variable names
+
+As **tibbles** do not have row names (see [Tibble structures](https://neof-workshops.github.io/Tidyverse/tibble/structure.html)), column/variable names are frequently used in functions across `tidyverse` packages.
+
+### Column names without quotes
+
+For ease of use, column/variable names can be used without quotes in `tidyverse` functions.
+
+The below code is extracting the column `species` as a vector with the [`pull()`](/dplyr/pull.qmd) function.
+
+```{r mammal_species_pull, echo=TRUE}
+mammal_sleep_tbl |>
+  #SLice out top 10 rows
+  dplyr::slice_head(n=10) |>
+  #Pull out species column as a vector
+  dplyr::pull(species)
+```
+
+Compare this to base R which requires quotes around the column name.
+
+```{r mammal_species_base_r, echo=TRUE}
+mammal_sleep_tbl[1:10,"species"] |> as.vector()
+```
+
+### Column names with quotes
+
+However, quotes are needed for certain types of column/variable names.
+These include:
+
+-   Column names with spaces (e.g. `Average Height`)
+-   Column names with special characters such as `/` (e.g `Territory/Region`)
+-   Column names that are numbers (e.g. `2020`)
+
+Although double or single quotes can be used we suggest using the back tick `` ` ``.
+It is normally the top left key below the esc key.
+
+The below code is extracting the column `Average Index` as a vector with the [`pull()`](/dplyr/pull.qmd) function.
+
+```{r living_plant_pull, echo=TRUE}
+living_planet_tbl |>
+  #SLice out top 10 rows
+  dplyr::slice_head(n=10) |>
+  #Pull out species column as a vector
+  dplyr::pull(`Average Index`)
+```
+
+### To quote or not to quote
+
+Thankfully when printing or [glimpsing](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html) (covered later) a **tibble** it will show which columns need quotes.
+
+Notice the `` `Shucked Weight` ``, `` `Viscera Weight` ``, and `` `Shell Weight` `` column names with their back ticks in the below code output.
+They will need bacticking/quoting in `tidyverse__ functions.
+
+```{r crab_age_print, echo=TRUE}
+crab_age_pred_tbl |> print()
+```
+
+```{r crab_age_glimpse, echo=TRUE}
+crab_age_pred_tbl |> glimpse()
+```
 
 ## Row functions
 
@@ -998,9 +1059,6 @@ Superb!
 
 Excellent work on completing the `dplyr` tutorial.
 You've gone through pipes, row and column functions, grouping, and binding of tibbles.
-It is a lot but the main website will act as a "cookbook for your future reference.
-I find it hard myself to remember the names of the functions and how they all work so I constantly refer to it as I carry otu my R coding.
+It is a lot but the main website will act as a "cookbook for your future reference. I find it hard myself to remember the names of the functions and how they all work so I constantly refer to it as I carry otu my R coding.
 
 The next tutorial will be a much smaller one focussing on `tidyr` which will me incredibly useful for the `ggplot2` tutorial.
-
-

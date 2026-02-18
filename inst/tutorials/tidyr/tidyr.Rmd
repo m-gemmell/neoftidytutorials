@@ -101,14 +101,13 @@ Features of the __long tibble__ include:
 Due to these differences the __long tibble__ has more rows (226 vs 4) whilst the __wide tibble__ has more columns (60 vs 3 ).
 In other words, the __long tibble__ is longer and the __wide tibble__ is wider.
 
-
 ## pivot_longer()
 
 <center>![](./images/tidyr_pivot_longer.png){style="width:150px"}</center>
 
 The `pivot_longer()` function is a relatively straightforward function for longifying a tibble.
 
-### Pivot longer exercises
+### Pivot longer exercise
 
 Read through the below link and use it as a guide to complete the challenges.
 
@@ -151,27 +150,221 @@ living_planet_wide_tbl |>
   tidyr::pivot_longer("1970":"2018", names_to="Year", values_to="AverageIndex")
 ```
 
+Brilliant!
+The next function is `pivot_wider()`.
+
 ## pivot_wider()
 
 <center>![](./images/tidyr_pivot_wider.png){style="width:150px"}</center>
 
 The `pivot_wider()` function is a relatively straightforward function for widening a tibble.
 
-### Pivot longer exercises
+### Pivot longer exercise
 
-Read through the below link and use it as a guide to complete the challenges.
+Read through the below link and use it as a guide to complete the challenge.
 
-[Tidyr pivot_longer() page](https://neof-workshops.github.io/Tidyverse/tidyr/pivot_longer.html)
+[Tidyr pivot_wider() page](https://neof-workshops.github.io/Tidyverse/tidyr/pivot_wider.html)
 
 ### Challenge 1
 
+__Widen__ the `living_planet_tbl` tibble so it contains the `Average Index` values across the years.
+You will need to :
+
+- Remove the columns `Upper Index` and `Lower Index` before widening
+  - The function `dplyr::select()` can be used
+- Widen the tibble
+  - Take the names from the `Year` column
+  - Take the values from the `Average Index` column
+
+- __Note:__ Column/variable names with spaces need to be quoted with backticks (`` `Average Index` ``.
+
+```{r wider-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+living_planet_tbl
+```
+
+```{r wider-1-exercise-solution}
+living_planet_tbl |>
+  #Select wanted columns
+  dplyr::select(Region:`Average Index`) |>
+  #Widen tibble
+  tidyr::pivot_wider(names_from=Year, values_from=`Average Index`)
+```
+
+Excellent!
+Its time to look at sperating and uniting character vector columns.
+
+## Character vectors
+
+Next we'll see how we can seperate or combine character vector columns with:
+
+- `separate_wider_delim()`: Splits a string column into multiple columns by a delimiter.
+- `unite()`: Combines/unites multiple string columns into one column.
+
+## seperate_wider()
+<center>![](./images/tidyr_separate_wider.png){style="width:150px"}</center>
+
+The `separate_wider_delim()` function can split a character column into multiple columns.
+
+### Separate exercise
+
+Read through the below link and use it as a guide to complete the challenge.
+
+[Tidyr separate_wider_delim() page](https://neof-workshops.github.io/Tidyverse/tidyr/separate_wider.html)
+
+### Challenge 1
+
+Separate the column `Area` of the `bat_roost_wide_tbl` to the following columns: `County`, `Region`, and `Country`.
+The delimiter is `;`.
+
+```{r separate-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+bat_roost_wide_tbl
+```
+
+```{r separate-1-exercise-solution}
+bat_roost_wide_tbl |>
+  tidyr::separate_wider_delim(Area, delim=";",
+    names = c("County","Region","Country"))
+```
+
+Super!
+We will look at `separate_wider()`'s opposite: `unite()`.
+
+## unite()
+<center>![](./images/tidyr_unite.png){style="width:150px"}</center>
 
 
+The `unite()` function can combine multiple character columns into one.
 
+### Unite exercise
 
+Read through the below link and use it as a guide to complete the challenges.
 
+[Tidyr unite() page](https://neof-workshops.github.io/Tidyverse/tidyr/unite.html)
 
+### Challenge 1
 
+With the `amphibian_div_tbl` unite the below columns in the specified order to create the column `Lineage`.
+Use the separator `;` and do not retain the original columns.
 
+1. `Order`
+2. `Family`
+3. `Genus`
+4. `Species`
 
+```{r unite-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+amphibian_div_tbl
+```
 
+```{r unite-1-exercise-solution}
+amphibian_div_tbl |>
+  unite("Lineage", c("Order","Family","Genus","Species"),
+    sep=";")
+```
+
+### Challenge 2
+
+With the `mushroom_tbl` unite the below columns in the specified order to create the column `cap_shape_surface_color`.
+Use the separator `_` and retain the original columns.
+
+1. `cap_shape`
+2. `cap_surface`
+3. `cap_color`
+
+```{r unite-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+mushroom_tbl
+```
+
+```{r unite-2-exercise-solution}
+mushroom_tbl |>
+  unite(cap_shape_surface_color,
+    c("cap_shape","cap_surface","cap_color"),
+    sep = "_", remove=FALSE)
+```
+
+Fantastic!
+Onto the final section: dropping and replacing `NAs`.
+
+## Missing data
+
+Many datasets will have missing data/values in the form of `NA`s.
+For many things these can be left alone.
+However, some calculations, such as mean, will result in a value of `NA` if an `NA` was in the data, not ideal.
+
+there are two main functions that can be used to deal with `NA`s:
+
+- `drop_na()`: Remove rows with NAs.
+- `replace_na`()`: Replace NAs.
+
+## drop_na()
+<center>![](./images/tidyr_drop_na.png){style="width:150px"}</center>
+
+The `drop_na()` function can remove rows containing `NA`s.
+
+### Drop NA exercise
+
+Read through the below link and use it as a guide to complete the challenges.
+
+[Tidyr drop_na() page](https://neof-workshops.github.io/Tidyverse/tidyr/drop_na.html)
+
+### Challenge 1
+
+Drop/remove all rows with an `NA`.
+
+```{r drop-na-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+amphibian_div_tbl
+```
+
+```{r drop-na-1-exercise-solution}
+amphibian_div_tbl |>
+  tidyr::drop_na()
+```
+
+### Challenge 2
+
+Drop/remove rows which have `NA`s in any of the columns from `Age_at_maturity_min_y` to `Offspring_size_max_mm`.
+
+```{r drop-na-2-exercise, exercise=TRUE, exercise.eval=FALSE}
+amphibian_div_tbl
+```
+
+```{r drop-na-2-exercise-solution}
+amphibian_div_tbl |>
+  tidyr::drop_na(Age_at_maturity_min_y:Offspring_size_max_mm)
+```
+
+Great!
+Instead of dropping `NA`s you can replace them.
+
+## replace_na()
+<center>![](./images/tidyr_replace_na.png){style="width:150px"}</center>
+
+The `replace_na()` function can replace `NA` values in columns.
+
+### Replace NA exercise
+
+Read through the below link and use it as a guide to complete the challenge.
+
+[Tidyr replace_na() page](https://neof-workshops.github.io/Tidyverse/tidyr/replace_na.html)
+
+### Challenge 1
+
+Replace `NA`s in the column `non_dreaming` of the tibble `mammal_sleep_tbl` with `0`s.
+
+```{r replace-na-1-exercise, exercise=TRUE, exercise.eval=FALSE}
+mammal_sleep_tbl
+```
+
+```{r replace-na-1-exercise-solution}
+mammal_sleep_tbl |>
+  tidyr::replace_na(list(non_dreaming=0))
+```
+
+Splendid!
+
+## Finish
+<center>![](./images/finish_flag.png){style="width:150px"}</center>
+
+Great effort on completing the `tidyr` tutorial.
+You've completed challenges on pivotting tibbles, separating and uniting character columns, and dealing with `NA`s.
+
+The next tutorial is the one I conider the most fun: cretaing plots with `ggplot2`.
