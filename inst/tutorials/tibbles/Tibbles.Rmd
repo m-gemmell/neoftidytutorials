@@ -29,12 +29,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 This tutorial covers tibbles and contains the following sections:
 
-- __Overview:__ The what and why of tibbles.
-- __Creating tibbles:__ Commands to create tibbles.
-- __Structure:__ The features of tibble.
-- __Subsetting:__ How to subset tibbles similar to data.frames.
-- __Printing or viewing:__ How tibbles are displayed/printed in R.
-- __Adding rows and columns:__ Brief intro to adding new rows and columns to a tibbles.
+- __Overview:__ The what and why of tibbles
+- __Creating tibbles:__ Commands to create tibbles
+- __Structure:__ The features of tibbles
+- __Subsetting:__ How to subset tibbles similar to data.frames
+- __Printing or viewing:__ How tibbles are displayed/printed in R
+- __Adding rows and columns:__ Brief intro to adding new rows and columns to a tibble
 
 [Tidyverse Tibble page](https://neof-workshops.github.io/Tidyverse/tibble/tibble.html)
 
@@ -42,8 +42,8 @@ This tutorial covers tibbles and contains the following sections:
 
 A __tibble__ (`tbl`) is a reimagining of the __data.frame__ (`df`) object. They are described as __data.frames__ that are:
 
-- __Lazy__: They don’t change variable names and partial matching does not work.
-- __Surly__: They complain more such as when a variable does not exist.
+- __Lazy__: They don’t change variable names and partial matching does not work
+- __Surly__: They complain more such as when a variable does not exist
 
 One important note is that __tibbles__ don’t have row names.
 
@@ -68,7 +68,7 @@ print(tbl)
 ```
 
 __Note:__ `print()` is used in this tutorial so the __tibbles__ and __data.frames__ are displayed as they would in your R terminal.
-Other tutorials will not use `print()` and the __tibbles__ will then be shown as full interactive tables.
+Other tutorials will not use `print()` and the __tibbles__ will then be shown as fully interactive tables.
 
 ## Creating tibbles
 
@@ -141,7 +141,7 @@ df <- iris
 print(head(df))
 ```
 
-Complete the below code by convert the __data.frame__ (`iris`) into a __tibble__ and displaying it.
+Complete the below code by converting the __data.frame__ (`iris`) into a __tibble__ and printing it.
 
 ```{r df-to-tbl-exercise, exercise=TRUE, exercise.eval=FALSE}
 #Assign tibble object to variable tbl
@@ -153,8 +153,8 @@ print(head(tbl))
 ```{r df-to-tbl-exercise-solution}
 #Assign tibble object to variable tbl
 tbl <- as_tibble(iris)
-#Print top 6 rows of tbl
-print(head(tbl))
+#Print tbl
+print(tbl)
 ```
 
 ### Quiz
@@ -172,15 +172,6 @@ question("When creating a tibble from vectors, what do the vectors become?",
 ```
 
 ```{r create-tbl-mcq-2, echo=FALSE}
-question("What do tibbles not have?",
-  answer("Columns"),
-  answer("Rows"),
-  answer("Row names", correct = TRUE),
-  allow_retry = TRUE
-)
-```
-
-```{r create-tbl-mcq-3, echo=FALSE}
 question("What function can be used to create a tibble from vectors?",
   answer("`tibble::as_tibble()`"),
   answer("`tibble::read_csv()`"),
@@ -189,7 +180,7 @@ question("What function can be used to create a tibble from vectors?",
 )
 ```
 
-```{r create-tbl-mcq-4, echo=FALSE}
+```{r create-tbl-mcq-3, echo=FALSE}
 question("What function can be used to convert a data.frame to a tibble?",
   answer("`tibble::as_tibble()`", correct = TRUE),
   answer("`tibble::read_csv()`"),
@@ -204,19 +195,19 @@ question("What function can be used to convert a data.frame to a tibble?",
 ![](images/tibble_structure.png){style="width:200px"}
 </center>
 
-__Tibbles__ have similar formats to __data.frames__ but with some extra functionality and terminology.
+__Tibbles__ have a similar format to __data.frames__ but with some extra functionality and terminology.
 
 ### Tibble components
 
 The main components of a __tibble__ are:
 
-- __Size info:__ When printing a __tibble__ in R it shows the number of rows and columns at the top.
-- __Rows/observations:__ __Tibbles__ do not have row names, instead being indexed solely by numbers.
-  - Rows are also known as __observations__.
+- __Size info:__ When printing a __tibble__ in R it shows the number of rows and columns at the top
+- __Rows/observations:__ __Tibbles__ do not have row names, instead being indexed solely by numbers
+  - Rows are also known as __observations__
 - __Columns/variables:__ __Tibble__ columns have various features:
-  - They have column names.
-  - Below each column name is its __data class__ (int, dbl, chr, etc.).
-  - Columns are also known as __variables__.
+  - They have column names
+  - Below each column name is its __data class__ (int, dbl, chr, etc.)
+  - Columns are also known as __variables__
 
 Please see the below __tibble__ as an example.
 
@@ -263,6 +254,15 @@ question("What is displayed below each column name?",
 )
 ```
 
+```{r str-tbl-mcq-4, echo=FALSE}
+question("What do tibbles not have?",
+  answer("Columns"),
+  answer("Rows"),
+  answer("Row names", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
 ## Subsetting
 
 <center>
@@ -276,10 +276,10 @@ This section will only show how to subset __tibbles__ using the same methods as 
 
 Methods to subset __tibbles__ include:
 
-- `tbl$column_name`: This produces a __vector__ from the specified column.
-- `tbl[rows,columns]`: This always produces a __tibble__.
-  - Numbers can be used to  represent row or column indexes.
-  - Strings can be used for columns based on their names.
+- `tbl$column_name`: This produces a __vector__ from the specified column
+- `tbl[rows,columns]`: This always produces a __tibble__
+  - Numbers can be used to  represent row or column indexes
+  - Strings can be used for columns based on their names
   
 For more details and help for the following exercises please see the below link:
 
@@ -295,7 +295,7 @@ print(mammal_sleep_tbl)
 
 ### Extract with `$`
 
-Print the "dreaming" column as a __vector__.
+Print the `dreaming` column as a __vector__.
 
 ```{r dreaming-col-to-vector-exercise, exercise=TRUE, exercise.eval=FALSE}
 mammal_sleep_tbl
@@ -305,7 +305,7 @@ mammal_sleep_tbl
 print(mammal_sleep_tbl$dreaming)
 ```
 
-Print the first 4 elements of the "brain_wt" column as a __vector__.
+Print the first 4 elements of the `brain_wt` column as a __vector__.
 
 ```{r brain-wt-col-to-vector-exercise, exercise=TRUE, exercise.eval=FALSE}
 mammal_sleep_tbl
@@ -317,7 +317,7 @@ print(mammal_sleep_tbl$brain_wt[1:4])
 
 ### Extract with `[,]`
 
-Print the element in row 1 and column 2.
+Print the element in row 1 and column 2 as a tibble.
 
 ```{r scalar-subset-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -337,7 +337,7 @@ print(mammal_sleep_tbl[,])
 print(mammal_sleep_tbl[2:4,9:11])
 ```
 
-Print the columns of "body_wt" and "life_span".
+Print the columns of `body_wt` and `life_span`".
 
 ```{r tbl-extract-two-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -347,7 +347,7 @@ print(mammal_sleep_tbl[,])
 print(mammal_sleep_tbl[,c("body_wt","life_span")])
 ```
 
-Print rows 4, 5, 6, 7, and 14 for the columns "dreaming" and "total_sleep" as a __tibble__.
+Print rows 4, 5, 6, 7, and 14 for the columns `dreaming` and `total_sleep` as a __tibble__.
 
 ```{r tbl-extract-three-exercise, exercise=TRUE, exercise.eval=FALSE}
 print(mammal_sleep_tbl[,])
@@ -397,13 +397,14 @@ question("Subsetting one element with `[,]` produces a:",
 
 __Tibbles__ have unique characteristics when printing or viewing them on a terminal.
 
-When viewing/printing a __tibble__ only a part of the __tibble__ will be displayed if its too wide (columns) or length (rows).
+When viewing/printing a __tibble__ only a part of the __tibble__ will be displayed if its too wide (columns) or long (rows).
 Information on the rows and columns not displayed is shown below the __tibble__. 
+
 The rules for what is displayed are:
 
-- __Width:__ The terminal will only show as many columns as it has room for.
-  - The number of columns depends on the width of the columns (i.e. 10 narrow columns may fit where only 5 wide wolumns could fit).
-- __Length:__ By default a maximum of 10 rows will be displayed.
+- __Width:__ The terminal will only show as many columns as it has room for
+  - The number of columns depends on the width of the columns (i.e. 10 narrow columns may fit where only 5 wide wolumns could fit)
+- __Length:__ By default a maximum of 10 rows will be displayed
 
 For more detail please see:
 

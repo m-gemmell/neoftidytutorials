@@ -1,0 +1,332 @@
+---
+title: "Ggplo2 tutorial"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    css: css/style.scss
+runtime: shiny_prerendered
+favicon: images/NEOF_favicon.png
+description: >
+  Tutorial covering ggplot2 package 
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+learnr::tutorial_options(exercise.completion = FALSE)
+library(tidyverse)
+library(lterdatasampler)
+library(mgrtibbles)
+library(hexbin)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## ggplot2
+
+<center>
+![](./images/ggplot2.png){style="width:150px"}
+</center>
+
+This tutorial covers the `ggplo2` package.
+
+[Tidyverse ggplot2 page](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html)
+
+## Anatomy
+
+<center>![](./images/ggplot2_basic_plot.png){style="width:150px"} ![](./images/ggplot2_input.png){style="width:150px"} </center>
+
+<center>![](./images/ggplot2_aesthetics.png){style="width:150px"} ![](./images/ggplot2_components.png){style="width:150px"} </center>
+
+This first section will focus on the anatomy of a `ggplot2`.
+This acts as an introduction to `ggplot2`.
+
+There is a lot of information in our tidyverse website so through these parts we will ask you to read the relevant part.
+Then we will reinforce that learning with MCQs (Multiple Choice Questions) and some coding challenges.
+
+## Basic plot
+<center>
+![](./images/ggplot2_basic_plot.png){style="width:150px"}
+</center>
+
+Read through the below web page:
+
+[Basic plot](https://neof-workshops.github.io/Tidyverse/ggplot2/basic_plot.html)
+
+### Quiz & challenge
+
+Attempt the below questions.
+
+```{r basic-plot-1-mcq, echo=FALSE}
+question("Which symbol is used to add components to a `ggplot` object?",
+  answer("`<-`"),
+  answer("`|>`"),
+  answer("`+`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r basic-plot-2-mcq, echo=FALSE}
+question("What is the order of the first 2 parameters in the `ggplot` function?",
+  answer("`data=, mapping=`", correct = TRUE),
+  answer("`mapping=, data=`"),
+  allow_retry = TRUE
+)
+```
+
+Complete the below code by:
+
+- Adding the `Year` column as the x aesthetic
+- Adding the `Population` column as the y aesthetic
+- Adding the `ggplot2::geom_line` layer as the last component to create a line chart
+
+```{r basic-plot-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
+world_pop_tbl |>
+  #Filter to only retain Australia rows
+  dplyr::filter(`Country/Territory` == "Australia") |>
+  #Convert Year column to numeric for plotting
+  dplyr::mutate(Year=as.numeric(Year)) |>
+  #ggplot object
+  ggplot2::ggplot(aes())
+```
+
+```{r basic-plot-exercise-solution}
+world_pop_tbl |>
+  #Filter to only retain Australia rows
+  dplyr::filter(`Country/Territory` == "Australia") |>
+  #Convert Year column to numeric for plotting
+  dplyr::mutate(Year=as.numeric(Year)) |>
+  #ggplot object
+  ggplot2::ggplot(aes(x = Year, y = Population)) +
+  #Line component/layer
+  ggplot2::geom_line()
+```
+
+Excellent!
+Now to look at the input data for `ggplot2`.
+
+## Input data
+<center>
+![](./images/ggplot2_input.png){style="width:150px"}
+</center>
+
+Read through the below web page:
+
+[Input data](https://neof-workshops.github.io/Tidyverse/ggplot2/input_data.html)
+
+### Quiz & challenge
+
+Attempt the below questions.
+
+```{r input-1-mcq, echo=FALSE}
+question("In long/tidy data, what is each column?",
+  answer("An observation"),
+  answer("A value"),
+  answer("A variable", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r input-2-mcq, echo=FALSE}
+question("In long/tidy data, what is each row?",
+  answer("An observation", correct = TRUE),
+  answer("A value"),
+  answer("A variable"),
+  allow_retry = TRUE
+)
+```
+
+```{r input-3-mcq, echo=FALSE}
+question("In long/tidy data, what is each cell?",
+  answer("An observation"),
+  answer("A value", correct = TRUE),
+  answer("A variable"),
+  allow_retry = TRUE
+)
+```
+
+Great!
+Next we'll cover aesthetics.
+
+## Aesthetics
+<center>
+![](./images/ggplot2_aesthetics.png){style="width:150px"}
+</center>
+
+Read through the below web page:
+
+[Aesthetics](https://neof-workshops.github.io/Tidyverse/ggplot2/aesthetics.html)
+
+### Quiz & challenge
+
+Attempt the below questions.
+All correct options must be chosen in the below questions.
+
+```{r aes-1-mcq, echo=FALSE}
+question("Which aesthetics should only be used for continuous variables?",
+  answer("color"),
+  answer("fill"),
+  answer("linetype"),
+  answer("linewidth", correct=TRUE),
+  answer("shape"),
+  answer("size", correct=TRUE),
+  answer("x"),
+  answer("y"),
+  allow_retry = TRUE
+)
+```
+
+```{r aes-2-mcq, echo=FALSE}
+question("Which aesthetics should only be used for categorical variables?",
+  answer("color"),
+  answer("fill"),
+  answer("linetype", correct=TRUE),
+  answer("linewidth"),
+  answer("shape", correct=TRUE),
+  answer("size"),
+  answer("x"),
+  answer("y"),
+  allow_retry = TRUE
+)
+```
+
+```{r aes-3-mcq, echo=FALSE}
+question("Which aesthetics can be used for categorical or continuous variables?",
+  answer("color", correct=TRUE),
+  answer("fill", correct=TRUE),
+  answer("linetype"),
+  answer("linewidth"),
+  answer("shape"),
+  answer("size"),
+  answer("x", correct=TRUE),
+  answer("y", correct=TRUE),
+  allow_retry = TRUE
+)
+```
+
+Super!
+Now it is time to look at components.
+
+## Components
+<center>
+![](./images/ggplot2_components.png){style="width:150px"}
+</center>
+
+Read through the below web page:
+
+[Components](https://neof-workshops.github.io/Tidyverse/ggplot2/components.html)
+
+### Challenges
+
+The below challenges will all involve adding components to a `ggplot` object to add complexity.
+
+### Challenge 1
+
+Create a scatter plot of `leaf1area` on the x axis and `leaf2area` on the y axis for the tibble `hbrmaples`.
+
+You will need to add the component `ggplot2::geom_pont()` to the below code.
+
+__Extra:__ Before creating the `ggplot` object remove rows with `NA`s. 
+
+```{r component-1-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
+hbr_maples |>
+  ggplot2::ggplot(aes(x=leaf1area, y=leaf2area))
+```
+
+```{r component-1-exercise-solution}
+hbr_maples |>
+  #Remove rows with NAs
+  tidyr::drop_na() |>
+  #Point plot of leaf1area (x) against leaf2area (y)
+  ggplot2::ggplot(aes(x=leaf1area, y=leaf2area)) +
+  ggplot2::geom_point()
+```
+
+### Challenge 2
+
+Add a box plot component (`ggplot2::geom_boxplot()`) to the below plot, ensuring the points are on top of the boxes.
+
+__Extra:__ Change `geom_point()` to `geom_jitter()`.
+
+```{r component-2-exercise, exercise=TRUE, exercise.eval=TRUE, out.width="100%"}
+hbr_maples |>
+  #Remove rows with NAs
+  tidyr::drop_na() |>
+  #Ggplot of stem_length (y) against watershed (x)
+  ggplot2::ggplot(aes(x=watershed, y=stem_length)) +
+  ggplot2::geom_point()
+```
+
+```{r component-2-exercise-solution}
+hbr_maples |>
+  #Remove rows with NAs
+  tidyr::drop_na() |>
+  #Ggplot of stem_length (y) against watershed (x)
+  ggplot2::ggplot(aes(x=watershed, y=stem_length)) +
+  #Boxplot
+  ggplot2::geom_boxplot() +
+  #Jitter points (on top of box plots)
+  ggplot2::geom_jitter()
+```
+
+Brilliant!
+That's the introduction to `ggplot2` done its time to look at various layers.
+
+## Layers
+
+<center>![](./images/ggplot2_geom_bar.png){style="width:150px"} ![](./images/ggplot2_geom_histogram.png){style="width:150px"} ![](./images/ggplot2_geom_line.png){style="width:150px"}</center>
+
+<center>![](./images/ggplot2_geom_point.png){style="width:150px"} ![](./images/ggplot2_geom_boxplot.png){style="width:150px"} ![](./images/ggplot2_other_geoms.png){style="width:150px"}</center>
+
+Layers are vital for `ggplot2`, without them your data will not be visualised.
+There are many different types all with strengths and weaknesses.
+This tutorial will focus on how to use them not the when and whys.
+
+### Exercise
+
+This section is entirely composed of challenges.
+You will need reference our [tidyverse website](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html) to find the correct functions and their usage.
+
+The challenges will be creating:
+
+- A Bar chart with [`geom_bar()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_bar.html)
+- A Histogram with [`geom_histogram()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_histogram.html)
+- A Line chart with [`geom_line()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_line.html)
+- A Scatter plot with [`geom_point()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_point.html)
+- A Box plot with [`geom_boxplot()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_boxplot.html)
+- A Heaxagonal 2D bin count heatmap with [`geom_hex()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_others.html)
+
+Additionally, each challenges will have an __extra optional__ task.
+These are __optional__ and you will need to reference the web pages in the [`ggplot2` customisation section](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html#customisation).
+
+### Bar chart challenge
+
+Create a bar chart with `mushroom_tbl` showing the relative proportions of the different cap shapes across the different cap colors.
+
+In other words:
+
+- Use `geom_bar()` as the `ggplot` layer
+- Use `cap_color` as the x aesthetic
+- Use `cap_shape` as the fill aesthetic
+- Set the option `position=` in `geom_bar()` so it displays relative proportions
+
+__Optional extra:__ Use the `
+
+
+```{r bar-chart-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
+
+```
+
+```{r bar-chart-exercise-solution}
+wong_pal <- c("#e69f00","#56b4e9","#009e73","#f0e442",
+                "#0072b2","#d55e00","#cc79a7","#000000")
+
+mushroom_tbl |>
+  ggplot2::ggplot(aes(x=cap_color, fill=cap_shape)) +
+  #Relative proprotion bar chart
+  ggplot2::geom_bar(position="fill") +
+  #Wong palette for fill
+  ggplot2::scale_fill_manual(values = wong_pal)
+```

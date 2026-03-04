@@ -31,13 +31,13 @@ This tutorial covers the `dplyr` package.
 The package consists of a variety of functions for the manipulations of **tibbles**.
 It is described as a “grammar of data manipulation” using verbs as the name of its various functions.
 
-This tutorials contains the following sections:
+This tutorial contains the following sections:
 
--   **Pipes:** Using the tidyverse pipe (`|>`) to chain/pipe functions together.
--   **Rows:** The four main verbs/functions for row manipulation.
--   **Columns:** The six main verbs/functions for column manipulation.
--   **Grouping:** Grouping **tibbles** by a specific variable or variables and carrying out group wise calculations.
--   **Binding:** Binding **tibbles** together by columns or rows.
+-   **Pipes:** Using the tidyverse pipe (`|>`) to chain/pipe functions together
+-   **Rows:** The four main verbs/functions for row manipulation
+-   **Columns:** The six main verbs/functions for column manipulation
+-   **Grouping:** Grouping **tibbles** by a specific variable or variables and carrying out group wise calculations
+-   **Binding:** Binding **tibbles** together by columns or rows
 
 [Tidyverse Dplyr page](https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html)
 
@@ -45,9 +45,9 @@ This tutorials contains the following sections:
 
 <center>![](./images/dplyr_pipe.png){style="width:150px"}</center>
 
-The preferred method when using `dplyr` and other **tidyverse** package functions is to use pipes.
+The preferred method when using `dplyr` and other `tidyverse` package functions is to use pipes.
 
-The **tidyverse** pipe symbol is `|>` (historically it was `%>%`).
+The `tidyverse` pipe symbol is `|>` (historically it was `%>%`).
 
 **Keyboard shortcut:** `ctrl + shift + m` is the keyboard shortcut for `|>`.
 
@@ -65,7 +65,7 @@ These will be covered later but you won't need to know how they work to convert 
 
 ### Challenge 1
 
-The below code will show the top 6 rows of the watershed reference observations.
+The below code will show the top 6 rows of the `watershed` Reference observations.
 
 Unnest the following functions, converting the code to a piped version.
 
@@ -83,7 +83,7 @@ hbr_maples |>
 
 ### Challenge 2
 
-The challenge 2 code will remove rows with NAs, extract the leaf1area and leaf2area columns, then calculate the means of each column.
+The challenge 2 code will remove rows with NAs, extract the `leaf1area` and `leaf2area` columns, then calculate the means of each column.
 
 Instead of assigning a new **tibble** (`hbr_tbl`), pipe `hbr_maples` through the functions.
 
@@ -108,7 +108,12 @@ hbr_maples |>
 
 ### Challenge 3
 
-The third, and final, code keeps R2 transect rows, arranges the rows by stem_length, selects the 6th, 9th, and 10th columns, and slices out the bottom 8 rows.
+The third, and final, code:
+
+-   Keeps R2 `transect` rows
+-   Arranges the rows by `stem_length`
+-   Selects the 6th, 9th, and 10th columns
+-   Slices out the bottom 8 rows
 
 Unnest the nested functions and pipe `hbr_maples` through all the functions in the correct order.
 
@@ -136,6 +141,8 @@ We'll continue to use pipes throughout this tutorial and further ones.
 Let's continue.
 
 ## Column/variable names
+
+<center>![](./images/dplyr_col_names.png){style="width:150px"}</center>
 
 As **tibbles** do not have row names (see [Tibble structures](https://neof-workshops.github.io/Tidyverse/tibble/structure.html)), column/variable names are frequently used in functions across `tidyverse` packages.
 
@@ -186,7 +193,7 @@ living_planet_tbl |>
 Thankfully when printing or [glimpsing](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html) (covered later) a **tibble** it will show which columns need quotes.
 
 Notice the `` `Shucked Weight` ``, `` `Viscera Weight` ``, and `` `Shell Weight` `` column names with their back ticks in the below code output.
-They will need bacticking/quoting in `tidyverse__ functions.
+They will need bacticking/quoting in `tidyvers` functions.
 
 ```{r crab_age_print, echo=TRUE}
 crab_age_pred_tbl |> print()
@@ -198,14 +205,21 @@ crab_age_pred_tbl |> glimpse()
 
 ## Row functions
 
+<center>![](./images/dplyr_arrange.png){style="width:150px"} ![](./images/dplyr_distinct.png){style="width:150px"}</center>
+
+<center>![](./images/dplyr_filter.png){style="width:150px"} ![](./images/dplyr_slice.png){style="width:150px"}</center>
+
 ### The four verbs
 
 The four main `dplyr` verbs (i.e. functions) to manipulate rows are:
 
--   [**`arrange()`**](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html): Arrange the rows of a **tibble**. Can be used to reorder the rows based on the values of a column.
--   [**`distinct()`**](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html): Extracts unique/distinct rows from a **tibble**.
--   [**`filter()`**](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html): Extract rows by filtering with conditions. This can be used to pick rows of certain groups, filter based on numeric sizes, and more.
--   [**`slice()`**](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html): A set of methods to choose a slice of rows based on index positions, top and bottom observations, and min and max values based on a specific column. This is especially useful for piping (`|>`).
+-   [**`arrange()`**](https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html): Arrange the rows of a **tibble**
+    -   Can be used to reorder the rows based on the values of a column
+-   [**`distinct()`**](https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html): Extracts unique/distinct rows from a **tibble**
+-   [**`filter()`**](https://neof-workshops.github.io/Tidyverse/dplyr/filter.html): Extract rows by filtering with conditions
+    -   Can be used to pick rows of certain groups, filter based on numeric sizes, and more
+-   [**`slice()`**](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html): A set of methods to choose a slice of rows based on index positions, top and bottom observations, and min and max values based on a specific column
+    -   Especially useful for piping (`|>`)
 
 ## arrange()
 
@@ -495,6 +509,10 @@ question("Which function can extract rows using conditions on columns?",
 ```
 
 ## Column functions
+
+<center>![](./images/dplyr_glimpse.png){style="width:150px"} ![](./images/dplyr_select.png){style="width:150px"} ![](./images/dplyr_mutate.png){style="width:150px"}</center>
+
+<center>![](./images/dplyr_pull.png){style="width:150px"} ![](./images/dplyr_relocate.png){style="width:150px"} ![](./images/dplyr_rename.png){style="width:150px"}</center>
 
 ### The six verbs
 

@@ -119,19 +119,19 @@ if (window.hljs) {
 consists of a variety of functions for the manipulations of
 <strong>tibbles</strong>. It is described as a “grammar of data
 manipulation” using verbs as the name of its various functions.</p>
-<p>This tutorials contains the following sections:</p>
+<p>This tutorial contains the following sections:</p>
 <ul>
 <li><strong>Pipes:</strong> Using the tidyverse pipe
-(<code>|&gt;</code>) to chain/pipe functions together.</li>
+(<code>|&gt;</code>) to chain/pipe functions together</li>
 <li><strong>Rows:</strong> The four main verbs/functions for row
-manipulation.</li>
+manipulation</li>
 <li><strong>Columns:</strong> The six main verbs/functions for column
-manipulation.</li>
+manipulation</li>
 <li><strong>Grouping:</strong> Grouping <strong>tibbles</strong> by a
 specific variable or variables and carrying out group wise
-calculations.</li>
+calculations</li>
 <li><strong>Binding:</strong> Binding <strong>tibbles</strong> together
-by columns or rows.</li>
+by columns or rows</li>
 </ul>
 <p><a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/dplyr.html">Tidyverse
@@ -143,8 +143,8 @@ Dplyr page</a></p>
 <img src="images/dplyr_pipe.png" style="width:150px" />
 </center>
 <p>The preferred method when using <code>dplyr</code> and other
-<strong>tidyverse</strong> package functions is to use pipes.</p>
-<p>The <strong>tidyverse</strong> pipe symbol is <code>|&gt;</code>
+<code>tidyverse</code> package functions is to use pipes.</p>
+<p>The <code>tidyverse</code> pipe symbol is <code>|&gt;</code>
 (historically it was <code>%&gt;%</code>).</p>
 <p><strong>Keyboard shortcut:</strong> <code>ctrl + shift + m</code> is
 the keyboard shortcut for <code>|&gt;</code>.</p>
@@ -164,8 +164,8 @@ how they work to convert the code to piped versions.</p>
 </div>
 <div id="section-challenge-1" class="section level3">
 <h3>Challenge 1</h3>
-<p>The below code will show the top 6 rows of the watershed reference
-observations.</p>
+<p>The below code will show the top 6 rows of the <code>watershed</code>
+Reference observations.</p>
 <p>Unnest the following functions, converting the code to a piped
 version.</p>
 <div class="tutorial-exercise" data-label="pipe-1-exercise"
@@ -187,8 +187,9 @@ data-pipe="|&gt;">
 </div>
 <div id="section-challenge-2" class="section level3">
 <h3>Challenge 2</h3>
-<p>The challenge 2 code will remove rows with NAs, extract the leaf1area
-and leaf2area columns, then calculate the means of each column.</p>
+<p>The challenge 2 code will remove rows with NAs, extract the
+<code>leaf1area</code> and <code>leaf2area</code> columns, then
+calculate the means of each column.</p>
 <p>Instead of assigning a new <strong>tibble</strong>
 (<code>hbr_tbl</code>), pipe <code>hbr_maples</code> through the
 functions.</p>
@@ -218,9 +219,13 @@ data-pipe="|&gt;">
 </div>
 <div id="section-challenge-3" class="section level3">
 <h3>Challenge 3</h3>
-<p>The third, and final, code keeps R2 transect rows, arranges the rows
-by stem_length, selects the 6th, 9th, and 10th columns, and slices out
-the bottom 8 rows.</p>
+<p>The third, and final, code:</p>
+<ul>
+<li>Keeps R2 <code>transect</code> rows</li>
+<li>Arranges the rows by <code>stem_length</code></li>
+<li>Selects the 6th, 9th, and 10th columns</li>
+<li>Slices out the bottom 8 rows</li>
+</ul>
 <p>Unnest the nested functions and pipe <code>hbr_maples</code> through
 all the functions in the correct order.</p>
 <div class="tutorial-exercise" data-label="pipe-3-exercise"
@@ -252,6 +257,9 @@ further ones. Let’s continue.</p>
 </div>
 <div id="section-columnvariable-names" class="section level2">
 <h2>Column/variable names</h2>
+<center>
+<img src="images/dplyr_col_names.png" style="width:150px" />
+</center>
 <p>As <strong>tibbles</strong> do not have row names (see <a
 href="https://neof-workshops.github.io/Tidyverse/tibble/structure.html">Tibble
 structures</a>), column/variable names are frequently used in functions
@@ -291,9 +299,9 @@ names. These include:</p>
 <code>Territory/Region</code>)</li>
 <li>Column names that are numbers (e.g. <code>2020</code>)</li>
 </ul>
-<p>Although double quote and single quotes can be used we suggest using
-the back tick <code>`</code>. It is normally the top left key below the
-esc key.</p>
+<p>Although double or single quotes can be used we suggest using the
+back tick <code>`</code>. It is normally the top left key below the esc
+key.</p>
 <p>The below code is extracting the column <code>Average Index</code> as
 a vector with the <a href="/dplyr/pull.qmd"><code>pull()</code></a>
 function.</p>
@@ -305,16 +313,16 @@ function.</p>
 <pre><code>##  [1] 100.00000  95.46197  94.68341  99.18117  99.38493  96.61808  92.43020
 ##  [8]  87.26712  80.73154  76.92543</code></pre>
 </div>
-</div>
-<div id="section-to-quote-or-not-to-quote" class="section level2">
-<h2>To quote or not to quote</h2>
+<div id="section-to-quote-or-not-to-quote" class="section level3">
+<h3>To quote or not to quote</h3>
 <p>Thankfully when printing or <a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html">glimpsing</a>
 (covered later) a <strong>tibble</strong> it will show which columns
 need quotes.</p>
 <p>Notice the <code>`Shucked Weight`</code>,
 <code>`Viscera Weight`</code>, and <code>`Shell Weight`</code> column
-names with their back ticks. They will need bacticking/quoting.</p>
+names with their back ticks in the below code output. They will need
+bacticking/quoting in <code>tidyvers</code> functions.</p>
 <pre class="r"><code>crab_age_pred_tbl |&gt; print()</code></pre>
 <pre><code>## # A tibble: 3,893 × 9
 ##    Sex   Length Diameter Height Weight `Shucked Weight` `Viscera Weight`
@@ -344,8 +352,17 @@ names with their back ticks. They will need bacticking/quoting.</p>
 ## $ `Shell Weight`   &lt;dbl&gt; 6.7471810, 1.5592225, 2.7640763, 5.2446575, 1.7009700…
 ## $ Age              &lt;dbl&gt; 9, 6, 6, 10, 6, 8, 15, 10, 13, 7, 6, 10, 9, 10, 11, 1…</code></pre>
 </div>
+</div>
 <div id="section-row-functions" class="section level2">
 <h2>Row functions</h2>
+<center>
+<img src="images/dplyr_arrange.png" style="width:150px" /> <img
+src="images/dplyr_distinct.png" style="width:150px" />
+</center>
+<center>
+<img src="images/dplyr_filter.png" style="width:150px" /> <img
+src="images/dplyr_slice.png" style="width:150px" />
+</center>
 <div id="section-the-four-verbs" class="section level3">
 <h3>The four verbs</h3>
 <p>The four main <code>dplyr</code> verbs (i.e. functions) to manipulate
@@ -353,20 +370,28 @@ rows are:</p>
 <ul>
 <li><a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/arrange.html"><strong><code>arrange()</code></strong></a>:
-Arrange the rows of a <strong>tibble</strong>. Can be used to reorder
-the rows based on the values of a column.</li>
+Arrange the rows of a <strong>tibble</strong>
+<ul>
+<li>Can be used to reorder the rows based on the values of a column</li>
+</ul></li>
 <li><a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/distinct.html"><strong><code>distinct()</code></strong></a>:
-Extracts unique/distinct rows from a <strong>tibble</strong>.</li>
+Extracts unique/distinct rows from a <strong>tibble</strong></li>
 <li><a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/filter.html"><strong><code>filter()</code></strong></a>:
-Extract rows by filtering with conditions. This can be used to pick rows
-of certain groups, filter based on numeric sizes, and more.</li>
+Extract rows by filtering with conditions
+<ul>
+<li>Can be used to pick rows of certain groups, filter based on numeric
+sizes, and more</li>
+</ul></li>
 <li><a
 href="https://neof-workshops.github.io/Tidyverse/dplyr/slice.html"><strong><code>slice()</code></strong></a>:
 A set of methods to choose a slice of rows based on index positions, top
 and bottom observations, and min and max values based on a specific
-column. This is especially useful for piping (<code>|&gt;</code>).</li>
+column
+<ul>
+<li>Especially useful for piping (<code>|&gt;</code>)</li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -727,6 +752,16 @@ below MCQs.</p>
 </div>
 <div id="section-column-functions" class="section level2">
 <h2>Column functions</h2>
+<center>
+<img src="images/dplyr_glimpse.png" style="width:150px" /> <img
+src="images/dplyr_select.png" style="width:150px" /> <img
+src="images/dplyr_mutate.png" style="width:150px" />
+</center>
+<center>
+<img src="images/dplyr_pull.png" style="width:150px" /> <img
+src="images/dplyr_relocate.png" style="width:150px" /> <img
+src="images/dplyr_rename.png" style="width:150px" />
+</center>
 <div id="section-the-six-verbs" class="section level3">
 <h3>The six verbs</h3>
 <p>The six main verbs (i.e. functions) to manipulate columns are:</p>
@@ -2097,13 +2132,13 @@ learnr:::store_exercise_cache(structure(list(label = "slice-3-exercise", global_
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "row-mcq-1", question = structure("Which function can subset rows by indexes?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_47ddff2", 
+"character")), answers = list(structure(list(id = "lnr_ans_bc2dd95", 
     option = "`arrange()`", value = "`arrange()`", label = structure("<code>arrange()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_f0e9432", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_1fe017", 
     option = "`filter()`", value = "`filter()`", label = structure("<code>filter()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_80ad6f0", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_31e0ff", 
     option = "`slice()`", value = "`slice()`", label = structure("<code>slice()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2113,20 +2148,20 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "row-mcq-1-answer", question = "row-mcq-1"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 179287835.916513, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1498367241.30227, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "row-mcq-2", question = structure("Which function can order rows by a specific column?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_b867bd0", 
+"character")), answers = list(structure(list(id = "lnr_ans_5049818", 
     option = "`arrange()`", value = "`arrange()`", label = structure("<code>arrange()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ea63121", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_19bac62", 
     option = "`filter()`", value = "`filter()`", label = structure("<code>filter()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a4e9e73", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_fd53c08", 
     option = "`slice()`", value = "`slice()`", label = structure("<code>slice()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2136,7 +2171,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "row-mcq-2-answer", question = "row-mcq-2"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 60060420.9720322, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 209000980.902676, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
@@ -2144,13 +2179,13 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "row-mcq-3", question = structure("Which function can extract rows using conditions on columns?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_8db0fb7", 
+"character")), answers = list(structure(list(id = "lnr_ans_1f172ed", 
     option = "`arrange()`", value = "`arrange()`", label = structure("<code>arrange()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5a0073b", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_4a00dec", 
     option = "`filter()`", value = "`filter()`", label = structure("<code>filter()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9f29d3c", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_1b7d91f", 
     option = "`slice()`", value = "`slice()`", label = structure("<code>slice()<\u002fcode>", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2160,7 +2195,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "row-mcq-3-answer", question = "row-mcq-3"), loading = NULL, 
-    random_answer_order = FALSE, allow_retry = TRUE, seed = 890787700.585195, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 2059552928.54095, 
     options = list()), class = c("learnr_radio", "tutorial_question"
 )), session = session)
 </script>
