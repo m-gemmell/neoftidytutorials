@@ -682,6 +682,8 @@ The function `dplyr::mutate()` allows you to:
 
 The `mutate()` function allows you to carry out a variety of tasks.
 
+You can use operators and/or functions in a `mutate()` function with one or multiple columns/variables within the __tibble__ you are mutating.
+
 Read through and use the guidance in the below link to complete the challenges.
 
 [Dplyr mutate() page](https://neof-workshops.github.io/Tidyverse/dplyr/mutate.html)
