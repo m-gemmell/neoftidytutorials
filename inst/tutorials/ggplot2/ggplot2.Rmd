@@ -1,5 +1,5 @@
 ---
-title: "Ggplo2 tutorial"
+title: "Ggplot2 tutorial"
 output:
   learnr::tutorial:
     progressive: true
@@ -22,6 +22,7 @@ library(lterdatasampler)
 library(mgrtibbles)
 library(hexbin)
 knitr::opts_chunk$set(echo = FALSE)
+tutorial_options(exercise.timelimit = 300)
 ```
 
 ## ggplot2
@@ -78,9 +79,9 @@ question("What is the order of the first 2 parameters in the `ggplot` function?"
 
 Complete the below code by:
 
-- Adding the `Year` column as the x aesthetic
-- Adding the `Population` column as the y aesthetic
-- Adding the `ggplot2::geom_line` layer as the last component to create a line chart
+- Adding the `Year` column as the __x__ aesthetic
+- Adding the `Population` column as the __y__ aesthetic
+- Adding the `ggplot2::geom_line()` layer as the last component to create a line chart
 
 ```{r basic-plot-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
 world_pop_tbl |>
@@ -459,6 +460,35 @@ amphibian_div_tbl |>
   ggplot2::geom_boxplot()
 ```
 
+## Other geoms
+<center>
+![](./images/ggplot2_other_geoms.png){style="width:150px"}
+</center>
+
+Create a hexagonal 2D bin count heatmap of `mushroom_tbl` plotting the counts of different stem heights against stem width.
+
+In other words:
+
+- Use the tibble `mushroom_tbl` to create a `ggplot` object
+- Use `stem_width` as the __x__ aesthetic
+- Use `stem_height` as the __y__ aesthetic
+- Use `geom_hex()` as the `ggplot` layer
+
+[Tidyverse other geoms page](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_others.html)
+
+### Code
+
+```{r hex2d-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
+mushroom_tbl
+```
+
+```{r hex2d-exercise-solution}
+mushroom_tbl |>
+  ggplot2::ggplot(aes(x=stem_width, y=stem_height)) +
+  ggplot2::geom_hex()
+```
+
+
 ## Building complexity
 
 A great advantage of `ggplot2` is the ability to add components and options to gradually increase the complexity of plots.
@@ -472,7 +502,7 @@ You will need to follow the instructions to edit and add components to the code.
 Additionally, you will need to pipe the data into `dplyr` and `tidyr` functions before the `ggplot` creation for some of the challenges.
 
 This tutorial aims to make you familiar with `tidyverse` and our [Tidyverse website](https://neof-workshops.github.io/Tidyverse/).
-Please use our siet as a reference and feel free to copy, paste, and edit the code from it.
+Please use our site as a reference and feel free to copy, paste, and edit the code from it.
 
 ### Bar chart
 
@@ -503,8 +533,9 @@ mushroom_tbl |>
 Carry out the following:
 
 - Set the __color__ aesthetic to `species`
-- Change the layer from a histogram to a frequency polygon
-- Change the x label to "Weight (grams)"
+- Change the __layer__ from a histogram to a __frequency polygon__
+  - Keep the bin width value as 5
+- Change the __x__ label to "Weight (grams)"
 
 ```{r histogram-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
 and_vertebrates |>
@@ -532,7 +563,7 @@ and_vertebrates |>
 
 Carry out the following:
 
-- Change the layer from a normal line chart to a __steps__ line chart
+- Change the __layer__ from a normal line chart to a __steps__ line chart
 - Set the __legend text size__ to __8__
 - Set the __legend position__ to the __bottom__ of the plot 
 
@@ -561,8 +592,8 @@ Carry out the following:
 
 - Remove rows where `Height` is equal to 0
 - Change the __color__ aesthetic to `Age`
-- Facet grid the plot by rows using the `Sex` variable
-- Scale transform the y axis by log10
+- __Facet grid__ the plot by __rows__ using the `Sex` variable
+- Scale transform the __y__ axis by __log10__
 
 ```{r point-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%", fig.height=6}
 crab_age_pred_tbl |>
@@ -588,20 +619,16 @@ crab_age_pred_tbl |>
 
 Carry out the following:
 
-- Drop rows where `iucn_2cat` is `NA`
+- Drop rows where the `iucn_2cat` value is `NA`
 - Set `Family` to the __x__ aesthetic
 - Set `Body_size_mm` to the __y__ aesthetic
 - Discard outliers from the boxplot
   - You will need to look at the [official tidyverse `geom_boxplot()` page](https://ggplot2.tidyverse.org//reference/geom_boxplot.html)
 - Add the `geom_jitter()` layer and colour these points by `iucn_2cat`.
-- Make the x axis labels dodge each 
-- Remove rows where `Height` is equal to 0
-- Change the __color__ aesthetic to `Age`
-- [Facet](https://neof-workshops.github.io/Tidyverse/ggplot2/facet.html) grid the plot by rows using the `Sex` variable
-- [Scale transform](https://neof-workshops.github.io/Tidyverse/ggplot2/scale_values.html) the y axis by log10, setting 3 rows for dodging
-  - See our [`tidyverse` Guides page](https://neof-workshops.github.io/Tidyverse/ggplot2/guides.html)
+- Make the __x axis labels dodge__ each other
+  - Use 3 rows to dodge
 
-```{r boxplot-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%", fig.height=6}
+```{r boxplot-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
 amphibian_div_tbl |>
   ggplot2::ggplot(aes(y=Family,x=Body_size_mm)) +
   ggplot2::geom_boxplot()
@@ -619,4 +646,37 @@ amphibian_div_tbl |>
   ggplot2::geom_jitter(aes(color=iucn_2cat)) +
   #Set 3 rows for x axis label dodging
   ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 3))
+```
+
+### Other geoms
+
+Create a hexagonal 2D bin count heatmap of `mushroom_tbl` plotting the counts of different stem heights against stem width.
+
+In other words:
+
+- Use the tibble `mushroom_tbl` to create a `ggplot` object
+- Use `stem_width` as the __x__ aesthetic
+- Use `stem_height` as the __y__ aesthetic
+- Use `geom_hex()` as the `ggplot` layer
+
+[Tidyverse other geoms page](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_others.html)
+
+```{r hex2d-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
+mushroom_tbl |>
+  ggplot2::ggplot(aes(x=stem_width, y=stem_height)) +
+  ggplot2::geom_hex() +
+  
+```
+
+```{r hex2d-extra-exercise-solution}
+mushroom_tbl |>
+  dplyr::filter(class=="poisonous") |>
+  ggplot2::ggplot(aes(x=stem_width, y=stem_height)) +
+  ggplot2::geom_hex(binwidth=2) +
+  #Fixed aspect ratio
+  #Ensure hex sides are all equal length
+  ggplot2::coord_fixed(ratio=1) +
+  ggplot2::labs(x="Stem width (cm)", y = "Stem height (cm)",
+                title="Count of stem height against stem width of poisonous mushrooms") +
+  ggplot2::theme(legend.position="bottom")
 ```
