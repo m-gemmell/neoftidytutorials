@@ -31,34 +31,104 @@ tutorial_options(exercise.timelimit = 300)
 ![](./images/ggplot2.png){style="width:150px"}
 </center>
 
-This tutorial covers the `ggplo2` package.
+This tutorial covers `ggplot2`, the visualisation package of `Tidyverse`.
+It utilises the __grammar of graphics__ (the gg in `ggplot2`) to create plots/figures in a layered/compartmentalised fashion.
 
-[Tidyverse ggplot2 page](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html)
+### Sections
+
+This tutorial will contain the following main sections:
+
+### Anatomy
+<center>
+![](./images/ggplot2_anatomy.png){style="width:150px"}
+</center>
+
+
+A introduction to `ggplot2` covering: 
+
+- The creation of a basic plot
+- The format of input data
+- Mapping variables/columns to __Aesthetics__
+- Building up a plot with __components__ using `+`
+
+### Layers
+<center>
+![](./images/ggplot2_layers.png){style="width:150px"}
+</center>
+
+The different types of plots/geoms including:
+
+- Bar charts with `geom_bar()`
+- Histograms with `geom_histogram()`
+- Line graphs with `geom_line()`
+- Scatter plots with `geom_point()`
+- Box and whisker plots with `geom_boxplot()`
+- Other geoms
+
+### Customisations
+<center>
+![](./images/ggplot2_customise.png){style="width:150px"}
+</center>
+
+There are many components that can be used to customise your plots including:
+
+- Modifying labels with `labs()`
+- Changing the legend and fonts with `theme()`
+- Modifying the scale of the x and/or y axis
+- Changing the colours used for aesthetics
+- Changing the guides (i.e. the legend and axis values)
+- Adding annotations on top of plots
+- Modify the x and y axis aspect ratio
+- Facet/split the plot into multiple panels based on variables
+
+### Challenges +
+<center>
+![](./images/ggplot2_challenges.png){style="width:150px"}
+</center>
+
+The final section will consist of challenges to test your skills on all the previous parts.
+This will involve adding components to basic `ggplot` objects/figures to customise them and add complexity.
 
 ## Anatomy
+<center>
+![](./images/ggplot2_anatomy.png){style="width:150px"}
+</center>
 
-<center>![](./images/ggplot2_basic_plot.png){style="width:150px"} ![](./images/ggplot2_input.png){style="width:150px"} </center>
+There are multiple parts of a `ggplot2` figure including:
 
-<center>![](./images/ggplot2_aesthetics.png){style="width:150px"} ![](./images/ggplot2_components.png){style="width:150px"} </center>
+- The `ggplot2` object that contains the __data__ and __aesthetics__
+- The __aesthetics__: The visual properties of the plot that the variables/columns are mapped to (x axis, y-axis, colour etc.)
+- The __geom layers__: How the aesthetics are visualised (bar chart, boxplot, histogram etc.)
+- The __guides__: The text and other information on the axes and legends (labels, titles, etc.)
+- __Facetting__: Splitting of data to multiple plots (e.g. side by side box plots displaying different metrics)
 
-This first section will focus on the anatomy of a `ggplot2`.
-This acts as an introduction to `ggplot2`.
+There is a lot of information in our tidyverse website so through these parts we will ask you to read the relevant page.
+We will reinforce learning with MCQs (Multiple Choice Questions) and some coding challenges.
 
-There is a lot of information in our tidyverse website so through these parts we will ask you to read the relevant part.
-Then we will reinforce that learning with MCQs (Multiple Choice Questions) and some coding challenges.
+[Tidyverse ggplot2 page](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html)
 
 ## Basic plot
 <center>
 ![](./images/ggplot2_basic_plot.png){style="width:150px"}
 </center>
 
-Read through the below web page:
+A basic plot consists of:
+
+- Creating a `ggplot` object with `ggplot()` which includes:
+  - __The input data:__ a long formatted table, typically in `tibble` or `data.frame` format
+  - __Aesthetic mappings:__ The parts of a plot __variables/columns__ are mapped to
+- Adding components with `+`
+- Adding at least one __layer/geom__ to determine how the __aesthetics__ are visualised (e.g a bar chart with `geom_bar()`) 
+
+Read through the below web page for more information:
 
 [Basic plot](https://neof-workshops.github.io/Tidyverse/ggplot2/basic_plot.html)
 
+This is a basic introduction and more information on __input data__, __aesthetics__, and __components__ will be covered later.
+
 ### Quiz & challenge
 
-Attempt the below questions.
+Once you have finished reading the web page attempt the below questions.
 
 ```{r basic-plot-1-mcq, echo=FALSE}
 question("Which symbol is used to add components to a `ggplot` object?",
@@ -113,13 +183,21 @@ Now to look at the input data for `ggplot2`.
 ![](./images/ggplot2_input.png){style="width:150px"}
 </center>
 
-Read through the below web page:
+Input tables (`tibbles` or `data.frames`) for `ggplot2` must be long formatted.
+
+Long data has the following three features:
+
+- Each __variable__ is a __column__; each __column__ is a __variable__
+- Each __observation__ is a __row__; each __row__ is an __observation__
+- Each __value__ is a __cell__; each __cell__ is a single __value__
+
+Read through the below web page which has a lot more information and theory on long/tidy data:
 
 [Input data](https://neof-workshops.github.io/Tidyverse/ggplot2/input_data.html)
 
 ### Quiz & challenge
 
-Attempt the below questions.
+To assess your understanding please attempt the below questions.
 
 ```{r input-1-mcq, echo=FALSE}
 question("In long/tidy data, what is each column?",
@@ -156,7 +234,20 @@ Next we'll cover aesthetics.
 ![](./images/ggplot2_aesthetics.png){style="width:150px"}
 </center>
 
-Read through the below web page:
+__Aesthetics__ in `ggplot2` refer to the different visual properties of a plot.
+__Variables/columns__ are mapped to different __aesthetics__ to determine what data is plotted.
+
+Below is a `ggplot` scatter plot (`geom_point()`) using the `iris` dataset.
+The `Sepal.Width` variable is mapped to the __x aesthetic__ whilst the `Sepal.Length` variable is mapped to the __y aesthetic__.
+No other __aesthetics__ are used.
+
+```{r ciris-example, out.width="100%"}
+iris |>
+  ggplot2::ggplot(aes(x=Sepal.Width, y=Sepal.Length)) +
+  ggplot2::geom_point()
+```
+
+For information on different __aesthetics__ and which __aesthetics__ to use for __continuous__ and __categorical__ variables please read the following web page:
 
 [Aesthetics](https://neof-workshops.github.io/Tidyverse/ggplot2/aesthetics.html)
 
@@ -215,13 +306,17 @@ Now it is time to look at components.
 ![](./images/ggplot2_components.png){style="width:150px"}
 </center>
 
-Read through the below web page:
+The power and flexibility of `ggplot2` comes from the ability to add various components with `+`.
+This allows you to start with a basic plot followed by iterations of additions and edits rather than needing to fully visualise the plot before creating it. 
+
+Read through the below web page for an example of building up a plot from basic to more complex and an explantion on the order of components:
 
 [Components](https://neof-workshops.github.io/Tidyverse/ggplot2/components.html)
 
 ### Challenges
 
-The below challenges will all involve adding components to a `ggplot` object to add complexity.
+After reading the web page you can carry out the below challenges.
+They all involve adding components to a `ggplot` object.
 
 ### Challenge 1
 
@@ -273,25 +368,22 @@ hbr_maples |>
 ```
 
 Brilliant!
-That's the introduction to `ggplot2` done its time to look at various layers.
+That's the introduction to `ggplot2` done.
+It's time to look at various layers.
 
 ## Layers
 
 <center>
-![](./images/ggplot2_geom_bar.png){style="width:150px"} 
-![](./images/ggplot2_geom_histogram.png){style="width:150px"} 
-![](./images/ggplot2_geom_line.png){style="width:150px"}
+![](./images/ggplot2_layers.png){style="width:150px"}
 </center>
 
-<center>![](./images/ggplot2_geom_point.png){style="width:150px"} ![](./images/ggplot2_geom_boxplot.png){style="width:150px"} ![](./images/ggplot2_other_geoms.png){style="width:150px"}</center>
-
 Layers are vital for `ggplot2`, without them your data will not be visualised.
-There are many different types all with strengths and weaknesses.
+There are many different types, all with their own strengths and weaknesses.
 This tutorial will focus on how to use them not the when and whys.
 
 ### Exercises
 
-This following 6 sections are challenges.
+The following 6 sections are challenges.
 You will need to reference our [tidyverse website](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html) to find the correct functions and their usage.
 
 The challenges will be creating:
@@ -303,15 +395,12 @@ The challenges will be creating:
 - A Box plot with [`geom_boxplot()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_boxplot.html)
 - A Hexagonal 2D bin count heatmap with [`geom_hex()`](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_others.html)
 
-Additionally, each challenges will have an __extra optional__ task.
-These are __optional__ and you will need to reference the web pages in the [`ggplot2` customisation section](https://neof-workshops.github.io/Tidyverse/ggplot2/ggplot2.html#customisation) if you want to complete them.
-
 ## Bar chart
 <center>
 ![](./images/ggplot2_geom_bar.png){style="width:150px"}
 </center>
 
-Create a bar chart with `mushroom_tbl` showing the relative proportions of the different cap shapes across the different cap colors.
+Create a bar chart with `mushroom_tbl` showing the relative proportions of the different cap shapes across the different cap colours.
 
 In other words:
 
@@ -381,9 +470,9 @@ In other words:
 
 - Use the tibble `living_planet_tbl` to create a `ggplot` object
 - Use `Year` as the __x__ aesthetic
-- Use `Average Index` as the __fill__ aesthetic
-  - Remeber to use backticks (`` ` ``) when using column names with spaces
-- Use `Region` ad the __color__ aesthetic
+- Use `Average Index` as the __y__ aesthetic
+  - Remember to use backticks (`` ` ``) when using column names with spaces
+- Use `Region` as the __color__ aesthetic
 - Use `geom_line()` as the `ggplot` layer
 
 [Tidyverse `geom_line()` page](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_line.html)
@@ -489,11 +578,155 @@ mushroom_tbl |>
 ```
 
 
-## Building complexity
+## Customisation
+<center>
+![](./images/ggplot2_customise.png){style="width:150px"}
+</center>
 
-A great advantage of `ggplot2` is the ability to add components and options to gradually increase the complexity of plots.
+A great advantage of `ggplot2` is the ability to customise plots by adding components and options.
 
-## Challenges
+### Components
+
+Various non layer components includes:
+
+- [__`labs()`__](https://neof-workshops.github.io/Tidyverse/ggplot2/labels.html): Modifying labels on the axes, legend, and other plot labels
+- [__`theme()`__](https://neof-workshops.github.io/Tidyverse/ggplot2/theme.html): Modifying components of a theme including the legend position and the font sizes in the plot
+- [__Scale values__](https://neof-workshops.github.io/Tidyverse/ggplot2/scale_values.html): How to modify the scale of the x and y axis (e.g. plot values as log10 values or square root values)
+- [__Colour scales__](https://neof-workshops.github.io/Tidyverse/ggplot2/colour_scales.html): How to set the colours for aesthetics
+- [__Guides__](https://neof-workshops.github.io/Tidyverse/ggplot2/guides.html): Modify the appearance of guides including the layout of the legend and axes values
+  - Setting number of rows for legend values
+  - Allowing axis value/guides to dodge each other when they would otherwise overlap
+- [__Annotations__](https://neof-workshops.github.io/Tidyverse/ggplot2/annotation.html): Adding text and lines onto the plotting area
+  - Includes how to create a [statistical lm abline with the equation on the plot](https://neof-workshops.github.io/Tidyverse/ggplot2/annotation.html#statistical-abline-and-equation)
+- [__Coordinate systems__](https://neof-workshops.github.io/Tidyverse/ggplot2/coordinate_systems.html): Modify how the x and y aesthetics combine
+  - Modify the x and y aspect ratio
+- [__Facetting__](https://neof-workshops.github.io/Tidyverse/ggplot2/facet.html): Splitting a plot into multiple panels by subsetting the visualised data by one or two metadata categories
+
+### Quiz
+
+There is a lot of information in the various web pages for the different components.
+Rather than reading through them all one-by-one attempt the below questions to help make you familiar with what is in each page.
+
+### Annotate, lab or theme?
+
+```{r custom-1-mcq, echo=FALSE}
+question("Which function can change the names/labels of the x and/y axis?",
+  answer("`annotate()`"),
+  answer("`labs()`", correct = TRUE),
+  answer("`theme()`"),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-2-mcq, echo=FALSE}
+question("Which function can change font size and/or colour?",
+  answer("`annotate()`"),
+  answer("`labs()`"),
+  answer("`theme()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-3-mcq, echo=FALSE}
+question("Which function can add custom text onto a plot?",
+  answer("`annotate()`", correct = TRUE),
+  answer("`labs()`"),
+  answer("`theme()`"),
+  allow_retry = TRUE
+)
+```
+
+### Scales
+
+```{r custom-4-mcq, echo=FALSE}
+question("Which function can change colours for the colour/fill aesthetic to a colour brewer palette?",
+  answer("`scale_colour_brewer()`/`scale_fill_brewer()`", correct = TRUE),
+  answer("`scale_colour_manual()`/`scale_colour_manual()`"),
+  answer("`scale_x_continuous()`/`scale_y_continuous()`"),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-5-mcq, echo=FALSE}
+question("Which function can set the breaks and limits of the x/y aesthetic?",
+  answer("`scale_colour_brewer()`/`scale_fill_brewer()`"),
+  answer("`scale_colour_manual()`/`scale_colour_manual()`"),
+  answer("`scale_x_continuous()`/`scale_y_continuous()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-6-mcq, echo=FALSE}
+question("Which function can change colours for the colour/fill aesthetic to a custom palette contained in a vector?",
+  answer("`scale_colour_brewer()`/`scale_fill_brewer()`"),
+  answer("`scale_colour_manual()`/`scale_colour_manual()`", correct = TRUE),
+  answer("`scale_x_continuous()`/`scale_y_continuous()`"),
+  allow_retry = TRUE
+)
+```
+
+### Guides and coordinate systems
+
+```{r custom-7-mcq, echo=FALSE}
+question("Which function can set the number of columns for legend values?",
+  answer("`coord_fixed()`"),
+  answer("`guide_axis()`"),
+  answer("`legend_guide()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-8-mcq, echo=FALSE}
+question("Which function can allow the x or y axis values to dodge each other?",
+  answer("`coord_fixed()`"),
+  answer("`guide_axis()`", correct = TRUE),
+  answer("`legend_guide()`"),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-9-mcq, echo=FALSE}
+question("Which function can set the aspect ratio for the x and y axis?",
+  answer("`coord_fixed()`", correct = TRUE),
+  answer("`guide_axis()`"),
+  answer("`legend_guide()`"),
+  allow_retry = TRUE
+)
+```
+
+### Facetting
+
+```{r custom-10-mcq, echo=FALSE}
+question("When setting the scales as free which function has free scales for each panel?",
+  answer("`dplyr::vars()`"),
+  answer("`ggplot2::facet_grid()`"),
+  answer("`ggplot2::facet_wrap()`", correct = TRUE),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-11-mcq, echo=FALSE}
+question("Which function must variables be put in when facetting?",
+  answer("`dplyr::vars()`", correct = TRUE),
+  answer("`ggplot2::facet_grid()`"),
+  answer("`ggplot2::facet_wrap()`"),
+  allow_retry = TRUE
+)
+```
+
+```{r custom-12-mcq, echo=FALSE}
+question("Which function is better suited for facetting by 2 discrete variables?",
+  answer("`dplyr::vars()`"),
+  answer("`ggplot2::facet_grid()`", correct = TRUE),
+  answer("`ggplot2::facet_wrap()`"),
+  allow_retry = TRUE
+)
+```
+
+## Challenges +
+<center>
+![](./images/ggplot2_challenges.png){style="width:150px"}
+</center>
 
 To finish off this tutorial you will use all you have learnt to improve the plots you created when learning the different layers.
 
@@ -504,7 +737,7 @@ Additionally, you will need to pipe the data into `dplyr` and `tidyr` functions 
 This tutorial aims to make you familiar with `tidyverse` and our [Tidyverse website](https://neof-workshops.github.io/Tidyverse/).
 Please use our site as a reference and feel free to copy, paste, and edit the code from it.
 
-### Bar chart
+## Bar chart +
 
 Change the colours used for the __fill__ aesthetic to the Wong palette shown in the [Colour scales page](https://neof-workshops.github.io/Tidyverse/ggplot2/colour_scales.html).
 
@@ -528,7 +761,9 @@ mushroom_tbl |>
   ggplot2::scale_fill_manual(values = wong_pal)
 ```
 
-### Histogram
+Splendid!
+
+## Histogram +
 
 Carry out the following:
 
@@ -559,7 +794,9 @@ and_vertebrates |>
   ggplot2::labs(x = "Weight (grams)")
 ```
 
-### Line chart
+Exemplary!
+
+## Line chart +
 
 Carry out the following:
 
@@ -586,7 +823,9 @@ living_planet_tbl |>
         legend.position="bottom")
 ```
 
-### Scatter plot
+Amazing!
+
+## Scatter plot +
 
 Carry out the following:
 
@@ -615,7 +854,9 @@ crab_age_pred_tbl |>
   ggplot2::scale_y_log10()
 ```
 
-### Boxplot
+Superlative!
+
+## Boxplot +
 
 Carry out the following:
 
@@ -648,35 +889,49 @@ amphibian_div_tbl |>
   ggplot2::guides(x = ggplot2::guide_axis(n.dodge = 3))
 ```
 
-### Other geoms
+Exceptional!
 
-Create a hexagonal 2D bin count heatmap of `mushroom_tbl` plotting the counts of different stem heights against stem width.
+## Other geoms +
 
-In other words:
+Carry out the following:
 
-- Use the tibble `mushroom_tbl` to create a `ggplot` object
-- Use `stem_width` as the __x__ aesthetic
-- Use `stem_height` as the __y__ aesthetic
-- Use `geom_hex()` as the `ggplot` layer
-
+- Keep rows where `class` is equal to "poisonous"
+- Set the bin width of `geom_hex()` to 2
+  - [official `geom_hex()` reference page](https://ggplot2.tidyverse.org//reference/geom_hex.html)
 [Tidyverse other geoms page](https://neof-workshops.github.io/Tidyverse/ggplot2/geom_others.html)
+- Set the plot aspect ratio to 1
+- Set the continuous __x__ scale with the following features:
+  - The name/label is "Stem width (cm)"
+  - The breaks go from 0 to 60 by steps of 5
+- Set the continuous __y__ scale with the following features:
+  - The name/label is "Stem height (cm)"
+  - The breaks go from 0 to 20 by steps of 5
+  - The limits go from -1 to 22
+- Set the __title__ label to "Count of stem height against stem width of poisonous mushrooms"
+- Set the __legend position__ to the bottom of the plot
 
 ```{r hex2d-extra-exercise, exercise=TRUE, exercise.eval=FALSE, out.width="100%"}
 mushroom_tbl |>
   ggplot2::ggplot(aes(x=stem_width, y=stem_height)) +
-  ggplot2::geom_hex() +
-  
+  ggplot2::geom_hex()
 ```
 
 ```{r hex2d-extra-exercise-solution}
 mushroom_tbl |>
   dplyr::filter(class=="poisonous") |>
   ggplot2::ggplot(aes(x=stem_width, y=stem_height)) +
+  #Set bin width of geom hex
   ggplot2::geom_hex(binwidth=2) +
   #Fixed aspect ratio
-  #Ensure hex sides are all equal length
   ggplot2::coord_fixed(ratio=1) +
-  ggplot2::labs(x="Stem width (cm)", y = "Stem height (cm)",
-                title="Count of stem height against stem width of poisonous mushrooms") +
+  #Change x and y scales
+  ggplot2::scale_x_continuous(name="Stem width (cm)", breaks=seq(from=0,to=60,by=5)) +
+  ggplot2::scale_y_continuous(name="Stem height (cm)", 
+                              breaks=seq(from=0,to=20,by=5),limits=c(-1,22)) +
+  #Custom labels
+  ggplot2::labs(title="Count of stem height against stem width of poisonous mushrooms") +
+  #Set plot legend to bottom of plot
   ggplot2::theme(legend.position="bottom")
 ```
+
+Champion!
