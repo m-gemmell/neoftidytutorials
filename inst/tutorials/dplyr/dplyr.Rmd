@@ -138,7 +138,6 @@ hbr_maples |>
 
 Great!
 We'll continue to use pipes throughout this tutorial and further ones.
-Let's continue.
 
 ## Column/variable names
 
@@ -154,7 +153,7 @@ The below code is extracting the column `species` as a vector with the [`pull()`
 
 ```{r mammal_species_pull, echo=TRUE}
 mammal_sleep_tbl |>
-  #SLice out top 10 rows
+  #Slice out top 10 rows
   dplyr::slice_head(n=10) |>
   #Pull out species column as a vector
   dplyr::pull(species)
@@ -182,7 +181,7 @@ The below code is extracting the column `Average Index` as a vector with the [`p
 
 ```{r living_plant_pull, echo=TRUE}
 living_planet_tbl |>
-  #SLice out top 10 rows
+  #Slice out top 10 rows
   dplyr::slice_head(n=10) |>
   #Pull out species column as a vector
   dplyr::pull(`Average Index`)
@@ -193,7 +192,7 @@ living_planet_tbl |>
 Thankfully when printing or [glimpsing](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html) (covered later) a **tibble** it will show which columns need quotes.
 
 Notice the `` `Shucked Weight` ``, `` `Viscera Weight` ``, and `` `Shell Weight` `` column names with their back ticks in the below code output.
-They will need bacticking/quoting in `tidyvers` functions.
+They will need bacticking/quoting in `tidyverse` functions.
 
 ```{r crab_age_print, echo=TRUE}
 crab_age_pred_tbl |> print()
@@ -205,9 +204,7 @@ crab_age_pred_tbl |> glimpse()
 
 ## Row functions
 
-<center>![](./images/dplyr_arrange.png){style="width:150px"} ![](./images/dplyr_distinct.png){style="width:150px"}</center>
-
-<center>![](./images/dplyr_filter.png){style="width:150px"} ![](./images/dplyr_slice.png){style="width:150px"}</center>
+<center>![](./images/dplyr_rows.png){style="width:150px"}</center>
 
 ### The four verbs
 
@@ -235,7 +232,7 @@ Read through the below link and use it as a guide to complete the challenges.
 
 ### Challenge 1
 
-Arrange the `hbr_maples` **tibble** by its "stem_length" column in ascending order.
+Arrange the `hbr_maples` **tibble** by its `stem_length` column in ascending order.
 
 ```{r arrange-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_maples
@@ -250,7 +247,7 @@ hbr_maples |>
 
 ### Challenge 2
 
-Arrange the `hbr_maples` **tibble** by its "watershed" column in descending order.
+Arrange the `hbr_maples` **tibble** by its `watershed` column in descending order.
 
 ```{r arrange-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_maples
@@ -264,7 +261,7 @@ hbr_maples |>
 
 ### Challenge 3
 
-Arrange the `hbr_maples` **tibble** by the "year" column (ascending, higher priority) and by the "leaf_dry_mass" column (descending, lower priority).
+Arrange the `hbr_maples` **tibble** by the `year` column (ascending, higher priority) and by the `leaf_dry_mass` column (descending, lower priority).
 
 ```{r arrange-3-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_maples
@@ -289,7 +286,7 @@ This is not commonly used but is very handy when you have duplicated rows in you
 
 ### Example
 
-Rather than challenges please look at the quick example.
+Rather than challenges please look at the quick examples.
 
 We can manipulate the `lterdatasampler::knz_bison()` **tibble** to duplicate the first 5 rows.
 
@@ -322,8 +319,8 @@ For further examples please see:
 To filter rows with a condition based on a column we can use the `dplyr::filter()` function.
 This includes:
 
--   Filtering rows by numerics in a row, e.g. extract rows from years \>= 2000.
--   Extracting rows belonging to certain groups of metadata.
+-   Filtering rows by numerics in a row, e.g. extract rows from years \>= 2000
+-   Extracting rows belonging to certain groups of metadata
 
 ### Filter exercise
 
@@ -337,7 +334,7 @@ Read through and use the guidance in the below link to complete the challenges.
 
 ### Challenge 1
 
-Retain observations/rows with a "leaf_dry_mass" less than or equal to 0.015.
+Retain observations/rows with a `leaf_dry_mass` less than or equal to 0.015.
 
 ```{r filter-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_maples
@@ -345,13 +342,13 @@ hbr_maples
 
 ```{r filter-1-exercise-solution}
 hbr_maples |>
-  #Filter to keep leaf_dry_mass greater or equal to 0.015
-  dplyr::filter(leaf_dry_mass >= 0.015)
+  #Filter to keep leaf_dry_mass smaller or equal to 0.015
+  dplyr::filter(leaf_dry_mass <= 0.015)
 ```
 
 ### Challenge 2
 
-Remove observations/rows with "Reference" as their "watershed" value.
+Remove observations/rows with "Reference" as their `watershed` value.
 
 ```{r filter-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 hbr_maples
@@ -368,7 +365,7 @@ hbr_maples |>
 Carry out the following filtering steps on `knz_bison`:
 
 1.  Retain only the male rows.
-2.  Retain observations from the year ("rec_year") 1998 or later.
+2.  Retain observations from the year (`rec_year`) 1998 or later.
 3.  Retain animals with a weight range of 200 to 250
 
 ```{r filter-3-exercise, exercise=TRUE, exercise.eval=FALSE}
@@ -421,12 +418,12 @@ However, it is particularly useful within tidyverse as you can pipe to a slice.
 
 On top of the base `slice()` function there are a variety with different applications:
 
--   `slice()`: Index rows by numeric index location.
--   `slice_head()`: Select rows from the top of the **tibble**.
--   `slice_tail()`: Select rows from the bottom of the **tibble**.
--   `slice_sample()`: Randomly select rows.
--   `slice_min()`: Select rows with smallest values of variable.
--   `slice_max()`: Select rows with largest values of a variable.
+-   `slice()`: Index rows by numeric index location
+-   `slice_head()`: Select rows from the top of the **tibble**
+-   `slice_tail()`: Select rows from the bottom of the **tibble**
+-   `slice_sample()`: Randomly select rows
+-   `slice_min()`: Select rows with smallest values of variable
+-   `slice_max()`: Select rows with largest values of a variable
 
 ### Slice exercise
 
@@ -464,7 +461,7 @@ mammal_sleep_tbl |>
 
 ### Challenge 3
 
-Extract the 6 rows with the highest "brain_wt" values.
+Extract the 6 rows with the highest `brain_wt` values.
 
 ```{r slice-3-exercise, exercise=TRUE, exercise.eval=FALSE}
 mammal_sleep_tbl
@@ -510,20 +507,21 @@ question("Which function can extract rows using conditions on columns?",
 
 ## Column functions
 
-<center>![](./images/dplyr_glimpse.png){style="width:150px"} ![](./images/dplyr_select.png){style="width:150px"} ![](./images/dplyr_mutate.png){style="width:150px"}</center>
-
-<center>![](./images/dplyr_pull.png){style="width:150px"} ![](./images/dplyr_relocate.png){style="width:150px"} ![](./images/dplyr_rename.png){style="width:150px"}</center>
+<center>![](./images/dplyr_columns.png){style="width:150px"}</center>
 
 ### The six verbs
 
 The six main verbs (i.e. functions) to manipulate columns are:
 
--   [**`glimpse()`**](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html): Print a **tibble** in a transposed manner. Useful for seeing the data types of all the columns.
--   [**`mutate()`**](https://neof-workshops.github.io/Tidyverse/dplyr/mutate.html): Mutate columns to create new columns based on existing ones, modify existing columns, and delete columns.
--   [**`pull()`**](https://neof-workshops.github.io/Tidyverse/dplyr/pull.html): Pull out a single column from a **tibble**, resulting in a **vector**.
--   [**`relocate()`**](https://neof-workshops.github.io/Tidyverse/dplyr/relocate.html): Relocate columns. You can relocate columns to the start or end, and you can move them after or before specified columns.
--   [**`rename()`**](https://neof-workshops.github.io/Tidyverse/dplyr/rename.html): Rename columns in a **tibble**.
--   [**`select()`**](https://neof-workshops.github.io/Tidyverse/dplyr/select.html): Select specific columns of a **tibble**. Can be used with a variety of helper functions such as `starts_with()`, `ends_with()`, `contains()`, and `matches()`.
+-   [**`glimpse()`**](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html): Print a **tibble** in a transposed manner
+    -   Useful for seeing the data types of all the columns.
+-   [**`mutate()`**](https://neof-workshops.github.io/Tidyverse/dplyr/mutate.html): Mutate columns to create new columns based on existing ones, modify existing columns, and delete columns
+-   [**`pull()`**](https://neof-workshops.github.io/Tidyverse/dplyr/pull.html): Pull out a single column from a **tibble**, resulting in a **vector**
+-   [**`relocate()`**](https://neof-workshops.github.io/Tidyverse/dplyr/relocate.html): Relocate columns
+    -   You can relocate columns to the start or end, and you can move them after or before specified columns
+-   [**`rename()`**](https://neof-workshops.github.io/Tidyverse/dplyr/rename.html): Rename columns in a **tibble**
+-   [**`select()`**](https://neof-workshops.github.io/Tidyverse/dplyr/select.html): Select specific columns of a **tibble**
+    -   Can be used with a variety of helper functions such as `starts_with()`, `ends_with()`, `contains()`, and `matches()`
 
 On top of these functions the exercises will also use the row functions we've covered to reinforce learning.
 It also allows us to make even more interesting and useful piped code.
@@ -535,7 +533,7 @@ It also allows us to make even more interesting and useful piped code.
 The function `dplyr::glimpse()` allows you to print **tibbles** in a transposed manner.
 This will allow you to view all the columns with their data type and some of the first values.
 
-[Dplyr glimpse() page](https://neof-workshops.github.io/Tidyverse/dplyr/slice.html)
+[Dplyr glimpse() page](https://neof-workshops.github.io/Tidyverse/dplyr/glimpse.html)
 
 Below is an example of glimpsing the `lterdatasampler::hbr_maples` **tibble**.
 
@@ -569,7 +567,7 @@ Read through and use the guidance in the below link to complete the challenges.
 
 ### Challenge 1
 
-Subset the **tibble** from of `crab_age_pred_tbl` to only retain the "Diameter" column.
+Subset the **tibble** `crab_age_pred_tbl` to only retain the `Diameter` column.
 
 ```{r select-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 crab_age_pred_tbl
@@ -582,7 +580,7 @@ crab_age_pred_tbl |> select(Diameter)
 
 ### Challenge 2
 
-Select the columns "Family" to "Body_size_mm" from the `amphibian_div_tbl` **tibble**.
+Select the columns `Family` to `Body_size_mm` from the `amphibian_div_tbl` **tibble**.
 
 ```{r select-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 amphibian_div_tbl
@@ -596,7 +594,7 @@ amphibian_div_tbl |>
 
 ### Challenge 3
 
-Extract the top 10 rows of columns "Crop_type", "Humidity", and "Nitrogen" from the **tibble** `crop_and_soil_tbl`.
+Extract the top 10 rows of columns `Crop_type`, `Humidity`, and `Nitrogen` from the **tibble** `crop_and_soil_tbl`.
 
 ```{r select-3-exercise, exercise=TRUE, exercise.eval=FALSE}
 crop_and_soil_tbl
@@ -607,13 +605,13 @@ crop_and_soil_tbl |>
   #Select Crop_type, Humidity, and Nitrogen columns
   dplyr::select(Crop_type, Humidity, Nitrogen) |>
   #Slice to retain rows 1 to 10
-  dplyr::slice(1:10)
+  dplyr::slice_head(n=10)
 ```
 
 ### Challenge 4
 
 Extract all the columns with a name that starts with "cap" from `mushroom_tbl`.
-Then only retain rows where the "cap_color" is "red.
+Then only retain rows where the `cap_color` is "red.
 
 ```{r select-4-exercise, exercise=TRUE, exercise.eval=FALSE}
 mushroom_tbl
@@ -629,8 +627,8 @@ mushroom_tbl  |>
 
 ### Challenge 5
 
-Remove the columns "total_sleep" and "gestation" from `mammal_sleep_tbl`.
-Subsequently arrange the **tibble** by the "brain_wt" column in descending order.
+Remove the columns `total_sleep` and `gestation` from `mammal_sleep_tbl`.
+Subsequently arrange the **tibble** by the `brain_wt` column in descending order.
 
 ```{r select-5-exercise, exercise=TRUE, exercise.eval=FALSE}
 vars  <- c("total_sleep","gestation")
@@ -649,7 +647,7 @@ mammal_sleep_tbl |>
 
 ### Challenge 6
 
-With `select()` retain the columns "date" and "site", and any columns that contain "temp" in their name from `pie_crab`.
+With `select()` retain the columns `date` and `site`, and any columns that contain "temp" in their name from `pie_crab`.
 Afterwards ensure you only have unique rows.
 
 ```{r select-6-exercise, exercise=TRUE, exercise.eval=FALSE}
@@ -682,7 +680,7 @@ The function `dplyr::mutate()` allows you to:
 
 The `mutate()` function allows you to carry out a variety of tasks.
 
-You can use operators and/or functions in a `mutate()` function with one or multiple columns/variables within the __tibble__ you are mutating.
+You can use operators and/or functions in a `mutate()` function with one or multiple columns/variables within the **tibble** you are mutating.
 
 Read through and use the guidance in the below link to complete the challenges.
 
@@ -690,7 +688,7 @@ Read through and use the guidance in the below link to complete the challenges.
 
 ### Challenge 1
 
-Round the values in the "air_temp" column of `pie_crab`.
+Round the values in the `air_temp` column of `pie_crab`.
 
 ```{r mutate-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 pie_crab
@@ -704,8 +702,8 @@ pie_crab |>
 
 ### Challenge 2
 
-Building from the below code, create a new column in the subset `crab_age_pred_tbl` called "Weight_lbs" that contains the weight in pounds.
-The original "Weight" column is in ounces (16 ounces per pound).
+Building from the below code, create a new column in the subset `crab_age_pred_tbl` called `Weight_lbs` that contains the weight in pounds.
+The original `Weight` column is in ounces (16 ounces per pound).
 
 ```{r mutate-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 crab_age_pred_tbl |>
@@ -723,7 +721,7 @@ crab_age_pred_tbl |>
 
 ### Challenge 3
 
-Convert the "Length", "Diameter", and "Height" columns in the subset `crab_age_pred_tbl` to centimetres.
+Convert the `Length`, `Diameter`, and `Height` columns in the subset `crab_age_pred_tbl` to centimetres.
 The original values are in feet (1 foot = 30.48 cms)
 
 ```{r mutate-3-exercise, exercise=TRUE, exercise.eval=FALSE}
@@ -755,7 +753,7 @@ Read through and use the guidance in the below link to complete the challenges.
 
 ### Challenge 1
 
-Extract a vector of distinct/unique crop types ("Crop_type") from `crop_and_soil_tbl`.
+Extract a vector of distinct/unique crop types (`Crop_type`) from `crop_and_soil_tbl`.
 
 **Tip:** `dplyr::distinct()` works on **tibbles** whilst `unique()` works on **vectors**.
 
@@ -781,7 +779,7 @@ mammal_sleep_tbl
 
 ```{r pull-2-exercise-solution}
 mammal_sleep_tbl |>
-  #Arrange by life span (descendng)
+  #Arrange by life span (descending)
   dplyr::arrange(desc(life_span)) |>
   #Slice out top 10 rows
   dplyr::slice(1:10) |>
@@ -806,7 +804,7 @@ Read through and use the guidance in the below link to complete the following ch
 
 ### Challenge 1
 
-Relocate the "utm_easting" column to after the "utm_nothing" column in `nwt_pikas`.
+Relocate the `utm_easting` column to after the `utm_northing` column in `nwt_pikas`.
 
 ```{r relocate-1-exercise, exercise=TRUE, exercise.eval=FALSE}
 nwt_pikas
@@ -820,7 +818,7 @@ nwt_pikas |>
 
 ### Challenge 2
 
-Move the date columns to the end of `nt_icecover`.
+Move the date class columns to the end of `nt_icecover`.
 
 ```{r relocate-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 ntl_icecover
@@ -851,9 +849,9 @@ Read through and use the guidance in the below link to complete the following ch
 
 Carry out the following tasks for `crab_age_pred_tbl`:
 
--   Rename "Weight" to "weight_lbs"
--   Rename "Shucked Weight" to "shucked_weight_lbs"
--   Rename "Age" to "age_months"
+-   Rename `Weight` to `weight_lbs`
+-   Rename `Shucked Weight` to `shucked_weight_lbs`
+-   Rename `Age" to "age_months`
 -   Retain only the renamed columns
 
 ```{r rename-1-exercise, exercise=TRUE, exercise.eval=FALSE}
@@ -880,11 +878,11 @@ Onto grouping with **tibbles**.
 <center>![](./images/dplyr_group_by.png){style="width:150px"}</center>
 
 Tibbles can be grouped by one or more columns with `dplyr::group_by()`.
-Grouped **tibbles** can then be analysed with the following fucntions:
+Grouped **tibbles** can then be analysed with the following functions:
 
--   `count()`: Count the number of observations per group in a grouped **tibble**.
--   `sumarise()`: Summarise values within a grouped **tibble**.
-    -   This includes calculating means, median, and IQRs.
+-   `count()`: Count the number of observations per group in a grouped **tibble**
+-   `summarise()`: Summarise values within a grouped **tibble**
+    -   This includes calculating means, median, and IQRs
 
 ### Group exercise
 
@@ -913,8 +911,8 @@ bat_roost_tbl |>
 
 ### Challenge 2
 
-Group `mushroom_tbl` by "class" and "cap_shape".
-Then, summarise to calculate the mean and IQR values of "cap_diameter" for the groups.
+Group `mushroom_tbl` by `class` and `cap_shape`.
+Then, summarise to calculate the mean and IQR values of `cap_diameter` for the groups.
 
 ```{r group-2-exercise, exercise=TRUE, exercise.eval=FALSE}
 mushroom_tbl
@@ -934,8 +932,8 @@ mushroom_tbl |>
 
 ### Challenge 3
 
-Group `mammal_sleep_tbl` by "predation", "exposure", and "danger".
-Then, summarise to count rows per group and calculate the minimum, mean, and max brain weights ("brain_wt") per group.
+Group `mammal_sleep_tbl` by `predation`, `exposure`, and `danger`.
+Then, summarise to count rows per group and calculate the minimum, mean, and max brain weights (`brain_wt`) per group.
 
 ```{r group-3-exercise, exercise=TRUE, exercise.eval=FALSE}
 mammal_sleep_tbl
@@ -967,8 +965,8 @@ Finally its time to look at how to bind **tibbles**.
 
 **Tibbles** can be bound together to create a new **tibble** with:
 
--   `dplyr::bind_cols()`: Bind **tibbles** side by side.
--   `dplyr::bind_rows()`: Bind **tibbles** on top of each other.
+-   `dplyr::bind_cols()`: Bind **tibbles** side by side
+-   `dplyr::bind_rows()`: Bind **tibbles** on top of each other
 
 ### Binding exercise
 
@@ -977,7 +975,7 @@ Read through and use the guidance in the below links to complete the following c
 [Dplyr Bind tibbles page](https://neof-workshops.github.io/Tidyverse/dplyr/bind_tibbles.html)
 
 The below challenges will require you to subset a tibble in 2 different ways and then bind those **tibbles** together.
-You will need various `dplyr` functions that you have learnt through this tutorial.
+You will need various `dplyr` functions that you have learnt throughout this tutorial.
 
 Another important note is that you will need to create and assign (`<-`) new **tibbles**.
 
@@ -985,8 +983,8 @@ Another important note is that you will need to create and assign (`<-`) new **t
 
 Carry out the following tasks with the created `bat_tbl`:
 
-1.  Create a **tibble** called `bat_island_tbl` only containing rows for the "Regions" "Isle of Man" and "Channel Islands"
-2.  Create a **tibble** called `bat_ni_tbl` only containing rows for the "Country" "Northern Ireland"
+1.  Create a **tibble** called `bat_island_tbl` only containing rows for the `Regions` "Isle of Man" and "Channel Islands"
+2.  Create a **tibble** called `bat_ni_tbl` only containing rows for the `Country` "Northern Ireland"
 3.  Bind the **tibbles** `bat_island_tbl` and `bat_ni_tbl` by rows to a new **tibble** called `bat_uk_non_mainland_tbl`
 4.  View the **tibble** `bat_uk_non_mainland_tbl`
 
@@ -1030,10 +1028,10 @@ bat_uk_non_mainland_tbl
 
 Carry out the following tasks with the created `mammal_sleep_tbl`:
 
-1.  Create a **tibble** called `mammal_wt_tbl` only containing the rows for the top 10 dreamers (i.e. top 10 highest "dreaming" values). -
-    -   Ensure the **tibble** only contains the rows "species", "body_wt", and "brain_wt".
-2.  Create a **tibble** called `mammal_predation_tbl` only containing the rows for the top 10 dreamers (i.e. top 10 highest "dreaming" values).
-    -   Ensure the **tibble** only contains the rows "species", "predation", "exposure" and "danger".
+1.  Create a **tibble** called `mammal_wt_tbl` only containing the rows for the top 10 dreamers (i.e. top 10 highest `dreaming` values).
+    -   Ensure the **tibble** only contains the columns "species", "body_wt", and "brain_wt".
+2.  Create a **tibble** called `mammal_predation_tbl` only containing the rows for the top 10 dreamers (i.e. top 10 highest `dreaming` values).
+    -   Ensure the **tibble** only contains the columns "species", "predation", "exposure" and "danger".
 3.  Create a **tibble** by binding the `mammal_wt_tbl` and `mammal_predation_tbl` **tibbles** by columns called `mammal_top_sleepers`.
 4.  View all 3 created **tibbles**.
 5.  You'll notice you have the columns `species...1` and `species...4` in `mammal_top_sleepers`.
@@ -1079,6 +1077,6 @@ Superb!
 
 Excellent work on completing the `dplyr` tutorial.
 You've gone through pipes, row and column functions, grouping, and binding of tibbles.
-It is a lot but the main website will act as a "cookbook for your future reference. I find it hard myself to remember the names of the functions and how they all work so I constantly refer to it as I carry otu my R coding.
+It is a lot but the main website will act as a "cookbook" for your future reference. I find it hard myself to remember the names of the functions and how they all work so I constantly refer to it as I carry out my R coding.
 
 The next tutorial will be a much smaller one focussing on `tidyr` which will me incredibly useful for the `ggplot2` tutorial.

@@ -152,7 +152,7 @@ print(head(tbl))
 
 ```{r df-to-tbl-exercise-solution}
 #Assign tibble object to variable tbl
-tbl <- as_tibble(iris)
+tbl <- tibble::as_tibble(iris)
 #Print tbl
 print(tbl)
 ```
@@ -287,7 +287,7 @@ For more details and help for the following exercises please see the below link:
 
 ### Subsetting exercises
 
-For the exercises we'll use the tibble `mgrtibbles::mammal_sleep_tbl` which contains information on the amount of average sleep of various mammals.
+For the exercises we'll use the tibble `mgrtibbles::mammal_sleep_tbl` which contains information on the average sleep amounts of various mammals.
 
 ```{r pie-crab-subset, echo=FALSE}
 print(mammal_sleep_tbl)
@@ -302,7 +302,7 @@ mammal_sleep_tbl
 ```
 
 ```{r dreaming-col-to-vector-exercise-solution}
-print(mammal_sleep_tbl$dreaming)
+mammal_sleep_tbl$dreaming
 ```
 
 Print the first 4 elements of the `brain_wt` column as a __vector__.
@@ -312,7 +312,7 @@ mammal_sleep_tbl
 ```
 
 ```{r brain-wt-col-to-vector-exercise-solution}
-print(mammal_sleep_tbl$brain_wt[1:4])
+mammal_sleep_tbl$brain_wt[1:4]
 ```
 
 ### Extract with `[,]`
